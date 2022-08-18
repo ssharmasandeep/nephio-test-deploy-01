@@ -1,0 +1,19 @@
+apiVersion: ec2.aws.crossplane.io/v1beta1
+kind: SecurityGroup
+metadata:
+  name: me-eks-vpc-sg
+spec:
+  forProvider:
+    region: us-west-2
+    vpcIdRef:
+      name: mec-eks-vpc
+    groupName: mec-ekscluster-sg
+    description: Cluster communication with worker nodes
+    ingress:
+      - fromPort: 0
+        toPort: 0
+        ipProtocol: "-1"
+        ipRanges:
+          - cidrIp: 10.0.0.0/8
+  providerConfigRef:
+    name: default
