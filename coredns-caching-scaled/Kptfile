@@ -7,22 +7,21 @@ metadata:
 upstream:
   type: git
   git:
-    repo: https://github.com/nephio-project/nephio-packages.git
-    directory: /coredns-caching
-    ref: coredns-caching/v1
-  updateStrategy: resource-merge
+    repo: https://github.com/sandeepAarna/nephio-test-deploy-01.git
+    directory: coredns-caching-scaled
+    ref: main
 upstreamLock:
   type: git
   git:
-    repo: https://github.com/nephio-project/nephio-packages.git
-    directory: /coredns-caching
-    ref: coredns-caching/v1
-    commit: 8e5900fe3e6e69516c5207977e5c836884cb9cf4
+    repo: https://github.com/sandeepAarna/nephio-test-deploy-01.git
+    directory: coredns-caching-scaled
+    ref: main
+    commit: b53dd74addc97678c4ae06e0e7f4db977e537237
 info:
   description: CoreDNS application configured for the caching layer.
 pipeline:
   mutators:
-    - image: gcr.io/kpt-fn/set-namespace:v0.4.1
-      configPath: package-context.yaml
-    - image: gcr.io/jbelamaric-public/apply-scale-profile:v0.0.1
-      configPath: fn-config-apply-scale-profile.yaml
+  - image: gcr.io/kpt-fn/set-namespace:v0.4.1
+    configPath: package-context.yaml
+  - image: gcr.io/jbelamaric-public/apply-scale-profile:v0.0.1
+    configPath: fn-config-apply-scale-profile.yaml
