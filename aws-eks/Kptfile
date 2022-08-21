@@ -6,3 +6,9 @@ metadata:
     config.kubernetes.io/local-config: "true"
 info:
   description: sample description
+pipeline:
+  mutators:
+    - image: gcr.io/kpt-fn/search-replace:v0.2.0
+      configPath: setreplace.yaml
+    - image: gcr.io/kpt-fn/search-replace:v0.2.0
+      configPath: setreplaceall.yaml

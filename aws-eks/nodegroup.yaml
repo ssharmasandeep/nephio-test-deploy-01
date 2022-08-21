@@ -1,0 +1,24 @@
+apiVersion: eks.aws.crossplane.io/v1alpha1
+kind: NodeGroup
+metadata:
+  name: mec-new-eks-cluster-ng
+  labels:
+    dev: "true"
+spec:
+  forProvider:
+    region: us-west-2
+    clusterNameRef:
+      name: mec-new-eks-cluster
+    subnetRefs:
+      - name: mec-new-eks-vpc-s1
+      - name: mec-new-eks-vpc-s2
+    nodeRoleRef:
+      name: mec-new-eks-cluster-ngrole
+    scalingConfig:
+      desiredSize: 2
+      maxSize: 2
+      minSize: 2
+    instanceTypes:
+      - t3.medium
+  providerConfigRef:
+    name: default

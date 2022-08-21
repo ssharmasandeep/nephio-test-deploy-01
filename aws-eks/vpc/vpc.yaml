@@ -1,7 +1,7 @@
 apiVersion: ec2.aws.crossplane.io/v1beta1
 kind: VPC
 metadata:
-  name: mec-eks-vpc
+  name: mec-new-eks-vpc
 spec:
   forProvider:
     region: us-west-2
@@ -10,4 +10,4 @@ spec:
     enableDnsHostNames: true
     instanceTenancy: default
   providerConfigRef:
-    name: default 
+    name: default
