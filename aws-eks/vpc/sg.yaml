@@ -1,7 +1,7 @@
 apiVersion: ec2.aws.crossplane.io/v1beta1
 kind: SecurityGroup
 metadata:
-  name: me-eks-vpc-sg
+  name: mec-eks-vpc-sg
   config.kubernetes.io/depends-on: vpc.ec2.aws.crossplane.io/VPC/mec-new-eks-vpc
 spec:
   forProvider:

@@ -1,0 +1,20 @@
+apiVersion: ec2.aws.crossplane.io/v1beta1
+kind: RouteTable
+metadata:
+  name: mec-eks-vpc-rgt
+spec:
+  forProvider:
+    region: us-west-2
+    routes:
+      - destinationCidrBlock: 0.0.0.0/0
+        gatewayIdRef:
+          name: mec-eks-vpc-igw
+    associations:
+      - subnetIdRef:
+          name: mec-eks-vpc-s1
+      - subnetIdRef:
+          name: mec-eks-vpc-s2
+    vpcIdRef:
+      name: mec-eks-vpc
+  providerConfigRef:
+    name: default
