@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: setreplaceall
-data:
-  by-path: spec.forProvider.vpcIdRef.name
-  by-value: mec-eks-vpc
-  put-value: mec-new-eks-vpc
