@@ -1,0 +1,27 @@
+apiVersion: kpt.dev/v1
+kind: Kptfile
+metadata:
+  name: aws-eks
+  annotations:
+    config.kubernetes.io/local-config: "true"
+upstream:
+  type: git
+  git:
+    repo: https://github.com/sandeepAarna/nephio-test-deploy-01.git
+    directory: aws-eks
+    ref: main
+upstreamLock:
+  type: git
+  git:
+    repo: https://github.com/sandeepAarna/nephio-test-deploy-01.git
+    directory: aws-eks
+    ref: main
+    commit: aa916fe87b252cd96f15180b07dc68752e1e5e0e
+info:
+  description: sample description
+pipeline:
+  mutators:
+  - image: gcr.io/kpt-fn/search-replace:v0.2.0
+    configPath: setreplace.yaml
+  - image: gcr.io/kpt-fn/search-replace:v0.2.0
+    configPath: setreplaceall.yaml

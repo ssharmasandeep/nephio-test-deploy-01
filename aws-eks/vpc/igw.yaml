@@ -1,0 +1,12 @@
+apiVersion: ec2.aws.crossplane.io/v1beta1
+kind: InternetGateway
+metadata:
+  name: mec-new-eks-vpc-igw
+  config.kubernetes.io/depends-on: vpc.ec2.aws.crossplane.io/VPC/mec-new-eks-vpc
+spec:
+  forProvider:
+    region: us-west-2
+    vpcIdRef:
+      name: mec-new-eks-vpc
+  providerConfigRef:
+    name: default

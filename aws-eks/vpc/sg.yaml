@@ -1,0 +1,20 @@
+apiVersion: ec2.aws.crossplane.io/v1beta1
+kind: SecurityGroup
+metadata:
+  name: mec-eks-vpc-sg
+  config.kubernetes.io/depends-on: vpc.ec2.aws.crossplane.io/VPC/mec-new-eks-vpc
+spec:
+  forProvider:
+    region: us-west-2
+    vpcIdRef:
+      name: mec-new-eks-vpc
+    groupName: mec-ekscluster-sg
+    description: Cluster communication with worker nodes
+    ingress:
+    - fromPort: 0
+      toPort: 0
+      ipProtocol: "-1"
+      ipRanges:
+      - cidrIp: 10.0.0.0/8
+  providerConfigRef:
+    name: default
