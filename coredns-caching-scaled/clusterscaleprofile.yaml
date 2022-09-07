@@ -1,9 +1,10 @@
 apiVersion: infra.nephio.org/v1alpha1
 kind: ClusterScaleProfile
-metadata:
+metadata: # kpt-merge: /scale-profile
   name: scale-profile
   annotations:
     config.kubernetes.io/local-config: "true"
+    internal.kpt.dev/upstream-identifier: 'infra.nephio.org|ClusterScaleProfile|default|scale-profile'
 spec:
   autoscaling: false
   siteDensity: low

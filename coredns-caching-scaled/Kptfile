@@ -1,9 +1,10 @@
 apiVersion: kpt.dev/v1
 kind: Kptfile
-metadata:
+metadata: # kpt-merge: /coredns-caching-scaled
   name: coredns-caching-scaled
   annotations:
     config.kubernetes.io/local-config: "true"
+    internal.kpt.dev/upstream-identifier: 'kpt.dev|Kptfile|default|coredns-caching-scaled'
 upstream:
   type: git
   git:
@@ -16,7 +17,7 @@ upstreamLock:
     repo: https://github.com/sandeepAarna/nephio-test-deploy-01.git
     directory: coredns-caching-scaled
     ref: main
-    commit: b53dd74addc97678c4ae06e0e7f4db977e537237
+    commit: 70c5a7649d9b60cbebedcbf0a42adf85a7e57ab7
 info:
   description: CoreDNS application configured for the caching layer.
 pipeline:
