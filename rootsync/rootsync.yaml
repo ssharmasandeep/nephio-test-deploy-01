@@ -9,7 +9,7 @@ metadata: # kpt-merge: config-management-system/nephio-workload-cluster-sync
 spec:
   sourceFormat: unstructured
   git:
-    repo: https://github.com/sandeepaarna/repo-edge-01
+    repo: https://github.com/sandeepaarna/nephio-edge-cluster-01
     branch: main
     auth: none
     secretRef:
