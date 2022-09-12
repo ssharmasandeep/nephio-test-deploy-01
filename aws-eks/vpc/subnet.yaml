@@ -1,7 +1,9 @@
 apiVersion: ec2.aws.crossplane.io/v1beta1
 kind: Subnet
-metadata:
+metadata: # kpt-merge: /mec-new-eks-vpc-s1
   name: mec-new-eks-vpc-s1
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'ec2.aws.crossplane.io|Subnet|default|mec-new-eks-vpc-s1'
 spec:
   forProvider:
     region: us-west-2
@@ -15,8 +17,10 @@ spec:
 ---
 apiVersion: ec2.aws.crossplane.io/v1beta1
 kind: Subnet
-metadata:
+metadata: # kpt-merge: /mec-new-eks-vpc-s2
   name: mec-new-eks-vpc-s2
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'ec2.aws.crossplane.io|Subnet|default|mec-new-eks-vpc-s2'
 spec:
   forProvider:
     region: us-west-2
@@ -30,8 +34,10 @@ spec:
 ---
 apiVersion: ec2.aws.crossplane.io/v1beta1
 kind: Subnet
-metadata:
+metadata: # kpt-merge: /mec-new-eks-vpc-s3
   name: mec-new-eks-vpc-s3
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'ec2.aws.crossplane.io|Subnet|default|mec-new-eks-vpc-s3'
 spec:
   forProvider:
     region: us-west-2
@@ -44,8 +50,10 @@ spec:
 ---
 apiVersion: ec2.aws.crossplane.io/v1beta1
 kind: Subnet
-metadata:
+metadata: # kpt-merge: /mec-new-eks-vpc-s4
   name: mec-new-eks-vpc-s4
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'ec2.aws.crossplane.io|Subnet|default|mec-new-eks-vpc-s4'
 spec:
   forProvider:
     region: us-west-2

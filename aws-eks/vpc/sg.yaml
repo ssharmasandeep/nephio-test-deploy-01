@@ -1,7 +1,9 @@
 apiVersion: ec2.aws.crossplane.io/v1beta1
 kind: SecurityGroup
-metadata:
+metadata: # kpt-merge: /mec-eks-vpc-sg
   name: mec-eks-vpc-sg
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'ec2.aws.crossplane.io|SecurityGroup|default|mec-eks-vpc-sg'
 spec:
   forProvider:
     region: us-west-2

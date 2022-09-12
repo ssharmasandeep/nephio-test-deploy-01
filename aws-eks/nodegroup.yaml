@@ -1,9 +1,11 @@
 apiVersion: eks.aws.crossplane.io/v1alpha1
 kind: NodeGroup
-metadata:
+metadata: # kpt-merge: /mec-new-eks-cluster-ng
   name: mec-new-eks-cluster-ng
   labels:
     dev: "true"
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'eks.aws.crossplane.io|NodeGroup|default|mec-new-eks-cluster-ng'
 spec:
   forProvider:
     region: us-west-2

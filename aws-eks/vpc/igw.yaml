@@ -1,7 +1,9 @@
 apiVersion: ec2.aws.crossplane.io/v1beta1
 kind: InternetGateway
-metadata:
+metadata: # kpt-merge: /mec-new-eks-vpc-igw
   name: mec-new-eks-vpc-igw
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'ec2.aws.crossplane.io|InternetGateway|default|mec-new-eks-vpc-igw'
 spec:
   forProvider:
     region: us-west-2

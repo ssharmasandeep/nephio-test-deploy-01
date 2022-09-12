@@ -1,7 +1,9 @@
 apiVersion: ec2.aws.crossplane.io/v1beta1
 kind: VPC
-metadata:
+metadata: # kpt-merge: /mec-new-eks-vpc
   name: mec-new-eks-vpc
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'ec2.aws.crossplane.io|VPC|default|mec-new-eks-vpc'
 spec:
   forProvider:
     region: us-west-2

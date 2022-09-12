@@ -1,7 +1,9 @@
 apiVersion: ec2.aws.crossplane.io/v1beta1
 kind: RouteTable
-metadata:
+metadata: # kpt-merge: /mec-new-eks-vpc-rgt
   name: mec-new-eks-vpc-rgt
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'ec2.aws.crossplane.io|RouteTable|default|mec-new-eks-vpc-rgt'
 spec:
   forProvider:
     region: us-west-2

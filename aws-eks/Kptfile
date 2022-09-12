@@ -1,22 +1,23 @@
 apiVersion: kpt.dev/v1
 kind: Kptfile
-metadata:
-  name: default
+metadata: # kpt-merge: /aws-eks
+  name: aws-eks
   annotations:
     config.kubernetes.io/local-config: "true"
+    internal.kpt.dev/upstream-identifier: 'kpt.dev|Kptfile|default|aws-eks'
 upstream:
   type: git
   git:
     repo: https://github.com/sandeepAarna/nephio-test-deploy-01
     directory: aws-eks
-    ref: aws-eks/v1
+    ref: aws-eks/main
 upstreamLock:
   type: git
   git:
     repo: https://github.com/sandeepAarna/nephio-test-deploy-01
     directory: aws-eks
-    ref: aws-eks/v1
-    commit: 70c5a7649d9b60cbebedcbf0a42adf85a7e57ab7
+    ref: aws-eks/main
+    commit: 9d19977cc4589196771b2f472302bd342bd1aee2
 info:
   description: sample description
 pipeline:
