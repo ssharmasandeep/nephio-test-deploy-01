@@ -11,6 +11,6 @@ spec:
   git:
     repo: https://github.com/sandeepaarna/nephio-edge-cluster-01
     branch: main
-    auth: none
+    auth: token 
     secretRef:
       name: sync-coredns-auth
