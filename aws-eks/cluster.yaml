@@ -4,7 +4,6 @@ metadata:
   name: mec-new-eks-cluster
   labels:
     dev: "true"
-  config.kubernetes.io/depends-on: vpc.ec2.aws.crossplane.io/VPC/mec-new-eks-vpc, role.iam.aws.crossplane.io/Role/mec-new-eks-cluster-role
 spec:
   forProvider:
     region: us-west-2

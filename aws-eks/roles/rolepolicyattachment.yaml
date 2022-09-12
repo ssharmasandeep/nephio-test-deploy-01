@@ -2,7 +2,6 @@ apiVersion: iam.aws.crossplane.io/v1beta1
 kind: RolePolicyAttachment
 metadata:
   name: mec-new-eks-cluster-role-pa
-  config.kubernetes.io/depends-on: role.iam.aws.crossplane.io/Role/mec-new-eks-cluster-role
 spec:
   forProvider:
     policyArn: arn:aws:iam::aws:policy/AmazonEKSClusterPolicy
@@ -15,7 +14,6 @@ apiVersion: iam.aws.crossplane.io/v1beta1
 kind: RolePolicyAttachment
 metadata:
   name: mec-new-eks-cluster-role-service-pa
-  config.kubernetes.io/depends-on: role.iam.aws.crossplane.io/Role/mec-new-eks-cluster-role
 spec:
   forProvider:
     policyArn: arn:aws:iam::aws:policy/AmazonEKSServicePolicy
@@ -28,7 +26,6 @@ apiVersion: iam.aws.crossplane.io/v1beta1
 kind: RolePolicyAttachment
 metadata:
   name: mec-new-eks-cluster-ngrole-worker-pa
-  config.kubernetes.io/depends-on: role.iam.aws.crossplane.io/Role/mec-new-eks-cluster-role
 spec:
   forProvider:
     policyArn: arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy
@@ -41,7 +38,6 @@ apiVersion: iam.aws.crossplane.io/v1beta1
 kind: RolePolicyAttachment
 metadata:
   name: mec-new-eks-cluster-ngrole-cni-pa
-  config.kubernetes.io/depends-on: role.iam.aws.crossplane.io/Role/mec-new-eks-cluster-role
 spec:
   forProvider:
     policyArn: arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
@@ -54,7 +50,6 @@ apiVersion: iam.aws.crossplane.io/v1beta1
 kind: RolePolicyAttachment
 metadata:
   name: mec-new-eks-cluster-ngrole-registry-pa
-  config.kubernetes.io/depends-on: role.iam.aws.crossplane.io/Role/mec-new-eks-cluster-role
 spec:
   forProvider:
     policyArn: arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly

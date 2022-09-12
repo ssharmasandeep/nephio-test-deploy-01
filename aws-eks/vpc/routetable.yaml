@@ -2,7 +2,6 @@ apiVersion: ec2.aws.crossplane.io/v1beta1
 kind: RouteTable
 metadata:
   name: mec-new-eks-vpc-rgt
-  config.kubernetes.io/depends-on: vpc.ec2.aws.crossplane.io/VPC/mec-new-eks-vpc, vpc.ec2.aws.crossplane.io/InternetGateway/mec-new-eks-vpc-igw
 spec:
   forProvider:
     region: us-west-2
