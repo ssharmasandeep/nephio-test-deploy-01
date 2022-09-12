@@ -1,0 +1,4820 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  data:
+    ca.crt: |
+      -----BEGIN CERTIFICATE-----
+      MIIC5zCCAc+gAwIBAgIBADANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDEwprdWJl
+      cm5ldGVzMB4XDTIyMDcyMDA0NTI1MloXDTMyMDcxNzA0NTI1MlowFTETMBEGA1UE
+      AxMKa3ViZXJuZXRlczCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALSu
+      8tn5qu4OjQr38oa5ZctVFuVdxJNZvxBcDS3NrGL/+lDelyNBisi0L2IL8UEniPIv
+      ELbR0um7Qrj6JslQWKVF8vSDKyMwcCNAn1UcDqZWSYIzlPNWVZjtTm6NdttIb31o
+      f/Oq+xAcNVeVmbqZ5YOORuqLV0YeS1+EWZFxAeNYd0Jk3EVX6co1cvmZwzNJWQst
+      8dYyQEYORbzL7B2hBY8OWpjxuG/cgd2pqAVulYNc7eHUxmryCKII8wtccJEmqvZu
+      rOF2ahkE22dGOtDoxJOMpJEBri8soUzmM5WHRj+2cyvV4gAhgHhkFS8I5rumefNK
+      q77CaiFJFXMXoMTqzbsCAwEAAaNCMEAwDgYDVR0PAQH/BAQDAgKkMA8GA1UdEwEB
+      /wQFMAMBAf8wHQYDVR0OBBYEFKcVvp4/r5k422vc+b/mRAMiZHh4MA0GCSqGSIb3
+      DQEBCwUAA4IBAQC0f43tA+ALko7sSH4mWY3F5nr2KSoto472J9nGJNCB1ad/ccOC
+      0Dq6Z5NOWNjaQnYBSjKAUfYtmvH24TasXMqhrvxVzTnMdTnov3l116Rxy6nW1r5/
+      D+LxhUCDxY9GV5TSZk2d9BlVDR5UyLgO4uzLqwTZHQJuvCfu5RDF4cZIrLoeoL2q
+      6Z7T5raytFgpmE3Q8LVRuZ1gKgFtpaXV8H9BhS3NgqePysgzMrcXxh/b7mS7hOBh
+      7m76aNfYZFtPe94e5c1lq2mE0yxk1iUJV9hGbhZwd5HAFw+WLkap95u1TMzuDff0
+      hksv+9ZrCMkychbXSiOCGuwR+1MMJUPFvTlf
+      -----END CERTIFICATE-----
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: "2022-09-07T10:35:41Z"
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:ca.crt: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: "2022-09-07T10:35:41Z"
+    name: kube-root-ca.crt
+    namespace: config-management-monitoring
+    resourceVersion: "5122033"
+    uid: 9f693539-b267-4c3b-9d35-4b02ee00e11b
+- apiVersion: v1
+  data:
+    otel-collector-config.yaml: |
+      receivers:
+        opencensus:
+      exporters:
+        prometheus:
+          endpoint: :8675
+          namespace: config_sync
+      processors:
+        batch:
+      extensions:
+        health_check:
+      service:
+        extensions: [health_check]
+        pipelines:
+          metrics:
+            receivers: [opencensus]
+            processors: [batch]
+            exporters: [prometheus]
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","data":{"otel-collector-config.yaml":"receivers:\n  opencensus:\nexporters:\n  prometheus:\n    endpoint: :8675\n    namespace: config_sync\nprocessors:\n  batch:\nextensions:\n  health_check:\nservice:\n  extensions: [health_check]\n  pipelines:\n    metrics:\n      receivers: [opencensus]\n      processors: [batch]\n      exporters: [prometheus]\n"},"kind":"ConfigMap","metadata":{"annotations":{},"labels":{"app":"opentelemetry","component":"otel-collector","configmanagement.gke.io/arch":"csmr","configmanagement.gke.io/configmanagement":"config-management","configmanagement.gke.io/system":"true","k8s-app":"kubernetes-config-management"},"name":"otel-collector","namespace":"config-management-monitoring","ownerReferences":[{"apiVersion":"configmanagement.gke.io/v1","blockOwnerDeletion":true,"controller":true,"kind":"ConfigManagement","name":"config-management","uid":"39674f5c-7067-413b-803a-4a163e6cdace"}]}}
+    creationTimestamp: "2022-09-07T10:36:24Z"
+    labels:
+      app: opentelemetry
+      component: otel-collector
+      configmanagement.gke.io/arch: csmr
+      configmanagement.gke.io/configmanagement: config-management
+      configmanagement.gke.io/system: "true"
+      k8s-app: kubernetes-config-management
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:otel-collector-config.yaml: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:component: {}
+            f:configmanagement.gke.io/arch: {}
+            f:configmanagement.gke.io/configmanagement: {}
+            f:configmanagement.gke.io/system: {}
+            f:k8s-app: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"39674f5c-7067-413b-803a-4a163e6cdace"}:
+              .: {}
+              f:apiVersion: {}
+              f:blockOwnerDeletion: {}
+              f:controller: {}
+              f:kind: {}
+              f:name: {}
+              f:uid: {}
+      manager: Go-http-client
+      operation: Update
+      time: "2022-09-07T10:36:24Z"
+    name: otel-collector
+    namespace: config-management-monitoring
+    ownerReferences:
+    - apiVersion: configmanagement.gke.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ConfigManagement
+      name: config-management
+      uid: 39674f5c-7067-413b-803a-4a163e6cdace
+    resourceVersion: "5122581"
+    uid: 5d012818-f630-4797-a6cf-c23533c00693
+- apiVersion: v1
+  data:
+    ca.crt: |
+      -----BEGIN CERTIFICATE-----
+      MIIC5zCCAc+gAwIBAgIBADANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDEwprdWJl
+      cm5ldGVzMB4XDTIyMDcyMDA0NTI1MloXDTMyMDcxNzA0NTI1MlowFTETMBEGA1UE
+      AxMKa3ViZXJuZXRlczCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALSu
+      8tn5qu4OjQr38oa5ZctVFuVdxJNZvxBcDS3NrGL/+lDelyNBisi0L2IL8UEniPIv
+      ELbR0um7Qrj6JslQWKVF8vSDKyMwcCNAn1UcDqZWSYIzlPNWVZjtTm6NdttIb31o
+      f/Oq+xAcNVeVmbqZ5YOORuqLV0YeS1+EWZFxAeNYd0Jk3EVX6co1cvmZwzNJWQst
+      8dYyQEYORbzL7B2hBY8OWpjxuG/cgd2pqAVulYNc7eHUxmryCKII8wtccJEmqvZu
+      rOF2ahkE22dGOtDoxJOMpJEBri8soUzmM5WHRj+2cyvV4gAhgHhkFS8I5rumefNK
+      q77CaiFJFXMXoMTqzbsCAwEAAaNCMEAwDgYDVR0PAQH/BAQDAgKkMA8GA1UdEwEB
+      /wQFMAMBAf8wHQYDVR0OBBYEFKcVvp4/r5k422vc+b/mRAMiZHh4MA0GCSqGSIb3
+      DQEBCwUAA4IBAQC0f43tA+ALko7sSH4mWY3F5nr2KSoto472J9nGJNCB1ad/ccOC
+      0Dq6Z5NOWNjaQnYBSjKAUfYtmvH24TasXMqhrvxVzTnMdTnov3l116Rxy6nW1r5/
+      D+LxhUCDxY9GV5TSZk2d9BlVDR5UyLgO4uzLqwTZHQJuvCfu5RDF4cZIrLoeoL2q
+      6Z7T5raytFgpmE3Q8LVRuZ1gKgFtpaXV8H9BhS3NgqePysgzMrcXxh/b7mS7hOBh
+      7m76aNfYZFtPe94e5c1lq2mE0yxk1iUJV9hGbhZwd5HAFw+WLkap95u1TMzuDff0
+      hksv+9ZrCMkychbXSiOCGuwR+1MMJUPFvTlf
+      -----END CERTIFICATE-----
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: "2022-09-07T10:35:41Z"
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:ca.crt: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: "2022-09-07T10:35:41Z"
+    name: kube-root-ca.crt
+    namespace: config-management-system
+    resourceVersion: "5122035"
+    uid: 651a23a2-c5ef-416d-a7fe-64297ab29203
+- apiVersion: v1
+  data:
+    otel-agent-config.yaml: |
+      receivers:
+        opencensus:
+      exporters:
+        opencensus:
+          endpoint: otel-collector.config-management-monitoring:55678
+          tls:
+            insecure: true
+      processors:
+        batch:
+      extensions:
+        health_check:
+      service:
+        extensions: [health_check]
+        pipelines:
+          metrics:
+            receivers: [opencensus]
+            processors: [batch]
+            exporters: [opencensus]
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","data":{"otel-agent-config.yaml":"receivers:\n  opencensus:\nexporters:\n  opencensus:\n    endpoint: otel-collector.config-management-monitoring:55678\n    tls:\n      insecure: true\nprocessors:\n  batch:\nextensions:\n  health_check:\nservice:\n  extensions: [health_check]\n  pipelines:\n    metrics:\n      receivers: [opencensus]\n      processors: [batch]\n      exporters: [opencensus]\n"},"kind":"ConfigMap","metadata":{"annotations":{},"labels":{"app":"opentelemetry","component":"otel-agent","configmanagement.gke.io/arch":"csmr","configmanagement.gke.io/configmanagement":"config-management","configmanagement.gke.io/system":"true","k8s-app":"kubernetes-config-management"},"name":"otel-agent","namespace":"config-management-system","ownerReferences":[{"apiVersion":"configmanagement.gke.io/v1","blockOwnerDeletion":true,"controller":true,"kind":"ConfigManagement","name":"config-management","uid":"39674f5c-7067-413b-803a-4a163e6cdace"}]}}
+    creationTimestamp: "2022-09-07T10:36:24Z"
+    labels:
+      app: opentelemetry
+      component: otel-agent
+      configmanagement.gke.io/arch: csmr
+      configmanagement.gke.io/configmanagement: config-management
+      configmanagement.gke.io/system: "true"
+      k8s-app: kubernetes-config-management
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:otel-agent-config.yaml: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:component: {}
+            f:configmanagement.gke.io/arch: {}
+            f:configmanagement.gke.io/configmanagement: {}
+            f:configmanagement.gke.io/system: {}
+            f:k8s-app: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"39674f5c-7067-413b-803a-4a163e6cdace"}:
+              .: {}
+              f:apiVersion: {}
+              f:blockOwnerDeletion: {}
+              f:controller: {}
+              f:kind: {}
+              f:name: {}
+              f:uid: {}
+      manager: Go-http-client
+      operation: Update
+      time: "2022-09-07T10:36:24Z"
+    name: otel-agent
+    namespace: config-management-system
+    ownerReferences:
+    - apiVersion: configmanagement.gke.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ConfigManagement
+      name: config-management
+      uid: 39674f5c-7067-413b-803a-4a163e6cdace
+    resourceVersion: "5122580"
+    uid: b7ccd523-88d7-4b04-8259-82d80a331f22
+- apiVersion: v1
+  data:
+    deployment.yaml: |
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: # this field will be assigned dynamically by the reconciler-manager
+        namespace: config-management-system
+        labels:
+          app: reconciler
+          configmanagement.gke.io/system: "true"
+          configmanagement.gke.io/arch: "csmr"
+      spec:
+        minReadySeconds: 10
+        replicas: 1
+        strategy:
+          type: Recreate
+        selector:
+          matchLabels:
+            app: reconciler
+        template:
+          metadata:
+            labels:
+              app: reconciler
+          spec:
+            serviceAccountName: # this field will be assigned dynamically by the reconciler-manager
+            containers:
+            - name: hydration-controller
+              image: gcr.io/config-management-release/hydration-controller:v1.12.1-rc.3
+              command:
+              - /hydration-controller
+              args:
+              - "--v=0"
+              - "--repo-root=/repo"
+              - "--source-root=source"
+              - "--hydrated-root=hydrated"
+              - "--source-link=rev"
+              - "--hydrated-link=rev"
+              volumeMounts:
+              - name: repo
+                mountPath: /repo
+              terminationMessagePath: "/dev/termination-log"
+              terminationMessagePolicy: File
+              imagePullPolicy: IfNotPresent
+              securityContext:
+                allowPrivilegeEscalation: false
+                readOnlyRootFilesystem: false
+                capabilities:
+                  drop:
+                  - NET_RAW
+                runAsUser: 65533
+              resources:
+                requests:
+                  cpu: "10m"
+                  memory: "100Mi"
+            - name: reconciler
+              image: gcr.io/config-management-release/reconciler:v1.12.1-rc.3
+              command:
+              - /reconciler
+              args:
+              - "--v=0"
+              - "--repo-root=/repo"
+              - "--source-dir=/repo/source/rev"
+              - "--hydrated-root=/repo/hydrated"
+              - "--hydrated-link=rev"
+              env:
+              - name: KUBECACHEDIR
+                value: "/.kube/cache"
+              volumeMounts:
+              - name: repo
+                mountPath: /repo
+                readOnly: true
+              - name: kube
+                mountPath: /.kube
+              resources:
+                requests:
+                  cpu: "50m"
+                  memory: "200Mi"
+              securityContext:
+                allowPrivilegeEscalation: false
+                readOnlyRootFilesystem: true
+                capabilities:
+                  drop:
+                  - NET_RAW
+              terminationMessagePath: "/dev/termination-log"
+              terminationMessagePolicy: File
+              imagePullPolicy: IfNotPresent
+            - name: git-sync
+              image: gcr.io/config-management-release/git-sync:v3.5.1-gke.0__linux_amd64
+              args: ["--root=/repo/source", "--dest=rev", "--max-sync-failures=30", "--error-file=error.json", "--v=5"]
+              volumeMounts:
+              - name: repo
+                mountPath: /repo
+              - name: git-creds
+                mountPath: /etc/git-secret
+                readOnly: true
+              terminationMessagePath: "/dev/termination-log"
+              terminationMessagePolicy: File
+              imagePullPolicy: IfNotPresent
+              securityContext:
+                allowPrivilegeEscalation: false
+                readOnlyRootFilesystem: false
+                capabilities:
+                  drop:
+                  - NET_RAW
+                runAsUser: 65533
+              resources:
+                requests:
+                  cpu: "10m"
+                  memory: "200Mi"
+            - name: oci-sync
+              image: gcr.io/config-management-release/oci-sync:v1.12.1-rc.3
+              args: ["--root=/repo/source", "--dest=rev", "--max-sync-failures=30", "--error-file=error.json"]
+              volumeMounts:
+              - name: repo
+                mountPath: /repo
+              terminationMessagePath: "/dev/termination-log"
+              terminationMessagePolicy: File
+              imagePullPolicy: IfNotPresent
+              securityContext:
+                allowPrivilegeEscalation: false
+                readOnlyRootFilesystem: false
+                capabilities:
+                  drop:
+                  - NET_RAW
+                runAsUser: 65533
+              resources:
+                requests:
+                  cpu: "10m"
+                  memory: "200Mi"
+            - name: otel-agent
+              image: gcr.io/config-management-release/otelcontribcol:v0.38.0
+              command:
+              - /otelcontribcol
+              args:
+              - "--config=/conf/otel-agent-config.yaml"
+              resources:
+                limits:
+                  cpu: 1
+                  memory: 1Gi
+                requests:
+                  cpu: 10m
+                  memory: 100Mi
+              securityContext:
+                allowPrivilegeEscalation: false
+                readOnlyRootFilesystem: true
+                capabilities:
+                  drop:
+                  - NET_RAW
+              ports:
+              - containerPort: 55678 # Default OpenCensus receiver port.
+                protocol: TCP
+              - containerPort: 8888  # Metrics.
+                protocol: TCP
+              volumeMounts:
+              - name: otel-agent-config-vol
+                mountPath: /conf
+              livenessProbe:
+                httpGet:
+                  path: /
+                  port: 13133 # Health Check extension default port.
+                  scheme: HTTP
+                timeoutSeconds: 1
+                periodSeconds: 10
+                successThreshold: 1
+                failureThreshold: 3
+              readinessProbe:
+                httpGet:
+                  path: /
+                  port: 13133 # Health Check extension default port.
+                  scheme: HTTP
+                timeoutSeconds: 1
+                periodSeconds: 10
+                successThreshold: 1
+                failureThreshold: 3
+              terminationMessagePath: "/dev/termination-log"
+              terminationMessagePolicy: File
+              imagePullPolicy: IfNotPresent
+            restartPolicy: Always
+            terminationGracePeriodSeconds: 30
+            dnsPolicy: ClusterFirst
+            schedulerName: default-scheduler
+            volumes:
+            - name: repo
+              emptyDir: {}
+            - name: kube
+              emptyDir: {}
+            - name: git-creds
+              secret:
+                secretName: git-creds
+                defaultMode: 288
+            - name: otel-agent-config-vol
+              configMap:
+                name: otel-agent
+                defaultMode: 420
+            securityContext:
+              fsGroup: 65533
+              runAsUser: 1000
+              runAsNonRoot: true
+              seccompProfile:
+                type: RuntimeDefault
+        revisionHistoryLimit: 10
+        progressDeadlineSeconds: 600
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","data":{"deployment.yaml":"apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: # this field will be assigned dynamically by the reconciler-manager\n  namespace: config-management-system\n  labels:\n    app: reconciler\n    configmanagement.gke.io/system: \"true\"\n    configmanagement.gke.io/arch: \"csmr\"\nspec:\n  minReadySeconds: 10\n  replicas: 1\n  strategy:\n    type: Recreate\n  selector:\n    matchLabels:\n      app: reconciler\n  template:\n    metadata:\n      labels:\n        app: reconciler\n    spec:\n      serviceAccountName: # this field will be assigned dynamically by the reconciler-manager\n      containers:\n      - name: hydration-controller\n        image: gcr.io/config-management-release/hydration-controller:v1.12.1-rc.3\n        command:\n        - /hydration-controller\n        args:\n        - \"--v=0\"\n        - \"--repo-root=/repo\"\n        - \"--source-root=source\"\n        - \"--hydrated-root=hydrated\"\n        - \"--source-link=rev\"\n        - \"--hydrated-link=rev\"\n        volumeMounts:\n        - name: repo\n          mountPath: /repo\n        terminationMessagePath: \"/dev/termination-log\"\n        terminationMessagePolicy: File\n        imagePullPolicy: IfNotPresent\n        securityContext:\n          allowPrivilegeEscalation: false\n          readOnlyRootFilesystem: false\n          capabilities:\n            drop:\n            - NET_RAW\n          runAsUser: 65533\n        resources:\n          requests:\n            cpu: \"10m\"\n            memory: \"100Mi\"\n      - name: reconciler\n        image: gcr.io/config-management-release/reconciler:v1.12.1-rc.3\n        command:\n        - /reconciler\n        args:\n        - \"--v=0\"\n        - \"--repo-root=/repo\"\n        - \"--source-dir=/repo/source/rev\"\n        - \"--hydrated-root=/repo/hydrated\"\n        - \"--hydrated-link=rev\"\n        env:\n        - name: KUBECACHEDIR\n          value: \"/.kube/cache\"\n        volumeMounts:\n        - name: repo\n          mountPath: /repo\n          readOnly: true\n        - name: kube\n          mountPath: /.kube\n        resources:\n          requests:\n            cpu: \"50m\"\n            memory: \"200Mi\"\n        securityContext:\n          allowPrivilegeEscalation: false\n          readOnlyRootFilesystem: true\n          capabilities:\n            drop:\n            - NET_RAW\n        terminationMessagePath: \"/dev/termination-log\"\n        terminationMessagePolicy: File\n        imagePullPolicy: IfNotPresent\n      - name: git-sync\n        image: gcr.io/config-management-release/git-sync:v3.5.1-gke.0__linux_amd64\n        args: [\"--root=/repo/source\", \"--dest=rev\", \"--max-sync-failures=30\", \"--error-file=error.json\", \"--v=5\"]\n        volumeMounts:\n        - name: repo\n          mountPath: /repo\n        - name: git-creds\n          mountPath: /etc/git-secret\n          readOnly: true\n        terminationMessagePath: \"/dev/termination-log\"\n        terminationMessagePolicy: File\n        imagePullPolicy: IfNotPresent\n        securityContext:\n          allowPrivilegeEscalation: false\n          readOnlyRootFilesystem: false\n          capabilities:\n            drop:\n            - NET_RAW\n          runAsUser: 65533\n        resources:\n          requests:\n            cpu: \"10m\"\n            memory: \"200Mi\"\n      - name: oci-sync\n        image: gcr.io/config-management-release/oci-sync:v1.12.1-rc.3\n        args: [\"--root=/repo/source\", \"--dest=rev\", \"--max-sync-failures=30\", \"--error-file=error.json\"]\n        volumeMounts:\n        - name: repo\n          mountPath: /repo\n        terminationMessagePath: \"/dev/termination-log\"\n        terminationMessagePolicy: File\n        imagePullPolicy: IfNotPresent\n        securityContext:\n          allowPrivilegeEscalation: false\n          readOnlyRootFilesystem: false\n          capabilities:\n            drop:\n            - NET_RAW\n          runAsUser: 65533\n        resources:\n          requests:\n            cpu: \"10m\"\n            memory: \"200Mi\"\n      - name: otel-agent\n        image: gcr.io/config-management-release/otelcontribcol:v0.38.0\n        command:\n        - /otelcontribcol\n        args:\n        - \"--config=/conf/otel-agent-config.yaml\"\n        resources:\n          limits:\n            cpu: 1\n            memory: 1Gi\n          requests:\n            cpu: 10m\n            memory: 100Mi\n        securityContext:\n          allowPrivilegeEscalation: false\n          readOnlyRootFilesystem: true\n          capabilities:\n            drop:\n            - NET_RAW\n        ports:\n        - containerPort: 55678 # Default OpenCensus receiver port.\n          protocol: TCP\n        - containerPort: 8888  # Metrics.\n          protocol: TCP\n        volumeMounts:\n        - name: otel-agent-config-vol\n          mountPath: /conf\n        livenessProbe:\n          httpGet:\n            path: /\n            port: 13133 # Health Check extension default port.\n            scheme: HTTP\n          timeoutSeconds: 1\n          periodSeconds: 10\n          successThreshold: 1\n          failureThreshold: 3\n        readinessProbe:\n          httpGet:\n            path: /\n            port: 13133 # Health Check extension default port.\n            scheme: HTTP\n          timeoutSeconds: 1\n          periodSeconds: 10\n          successThreshold: 1\n          failureThreshold: 3\n        terminationMessagePath: \"/dev/termination-log\"\n        terminationMessagePolicy: File\n        imagePullPolicy: IfNotPresent\n      restartPolicy: Always\n      terminationGracePeriodSeconds: 30\n      dnsPolicy: ClusterFirst\n      schedulerName: default-scheduler\n      volumes:\n      - name: repo\n        emptyDir: {}\n      - name: kube\n        emptyDir: {}\n      - name: git-creds\n        secret:\n          secretName: git-creds\n          defaultMode: 288\n      - name: otel-agent-config-vol\n        configMap:\n          name: otel-agent\n          defaultMode: 420\n      securityContext:\n        fsGroup: 65533\n        runAsUser: 1000\n        runAsNonRoot: true\n        seccompProfile:\n          type: RuntimeDefault\n  revisionHistoryLimit: 10\n  progressDeadlineSeconds: 600\n"},"kind":"ConfigMap","metadata":{"annotations":{},"labels":{"configmanagement.gke.io/arch":"csmr","configmanagement.gke.io/configmanagement":"config-management","configmanagement.gke.io/system":"true","k8s-app":"kubernetes-config-management"},"name":"reconciler-manager-cm","namespace":"config-management-system","ownerReferences":[{"apiVersion":"configmanagement.gke.io/v1","blockOwnerDeletion":true,"controller":true,"kind":"ConfigManagement","name":"config-management","uid":"39674f5c-7067-413b-803a-4a163e6cdace"}]}}
+    creationTimestamp: "2022-09-07T10:36:24Z"
+    labels:
+      configmanagement.gke.io/arch: csmr
+      configmanagement.gke.io/configmanagement: config-management
+      configmanagement.gke.io/system: "true"
+      k8s-app: kubernetes-config-management
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:deployment.yaml: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:configmanagement.gke.io/arch: {}
+            f:configmanagement.gke.io/configmanagement: {}
+            f:configmanagement.gke.io/system: {}
+            f:k8s-app: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"39674f5c-7067-413b-803a-4a163e6cdace"}:
+              .: {}
+              f:apiVersion: {}
+              f:blockOwnerDeletion: {}
+              f:controller: {}
+              f:kind: {}
+              f:name: {}
+              f:uid: {}
+      manager: Go-http-client
+      operation: Update
+      time: "2022-09-07T10:36:24Z"
+    name: reconciler-manager-cm
+    namespace: config-management-system
+    ownerReferences:
+    - apiVersion: configmanagement.gke.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ConfigManagement
+      name: config-management
+      uid: 39674f5c-7067-413b-803a-4a163e6cdace
+    resourceVersion: "5122582"
+    uid: 61c1bd78-5f9d-4afa-b301-4abbc2bdaaff
+- apiVersion: v1
+  data:
+    ca.crt: |
+      -----BEGIN CERTIFICATE-----
+      MIIC5zCCAc+gAwIBAgIBADANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDEwprdWJl
+      cm5ldGVzMB4XDTIyMDcyMDA0NTI1MloXDTMyMDcxNzA0NTI1MlowFTETMBEGA1UE
+      AxMKa3ViZXJuZXRlczCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALSu
+      8tn5qu4OjQr38oa5ZctVFuVdxJNZvxBcDS3NrGL/+lDelyNBisi0L2IL8UEniPIv
+      ELbR0um7Qrj6JslQWKVF8vSDKyMwcCNAn1UcDqZWSYIzlPNWVZjtTm6NdttIb31o
+      f/Oq+xAcNVeVmbqZ5YOORuqLV0YeS1+EWZFxAeNYd0Jk3EVX6co1cvmZwzNJWQst
+      8dYyQEYORbzL7B2hBY8OWpjxuG/cgd2pqAVulYNc7eHUxmryCKII8wtccJEmqvZu
+      rOF2ahkE22dGOtDoxJOMpJEBri8soUzmM5WHRj+2cyvV4gAhgHhkFS8I5rumefNK
+      q77CaiFJFXMXoMTqzbsCAwEAAaNCMEAwDgYDVR0PAQH/BAQDAgKkMA8GA1UdEwEB
+      /wQFMAMBAf8wHQYDVR0OBBYEFKcVvp4/r5k422vc+b/mRAMiZHh4MA0GCSqGSIb3
+      DQEBCwUAA4IBAQC0f43tA+ALko7sSH4mWY3F5nr2KSoto472J9nGJNCB1ad/ccOC
+      0Dq6Z5NOWNjaQnYBSjKAUfYtmvH24TasXMqhrvxVzTnMdTnov3l116Rxy6nW1r5/
+      D+LxhUCDxY9GV5TSZk2d9BlVDR5UyLgO4uzLqwTZHQJuvCfu5RDF4cZIrLoeoL2q
+      6Z7T5raytFgpmE3Q8LVRuZ1gKgFtpaXV8H9BhS3NgqePysgzMrcXxh/b7mS7hOBh
+      7m76aNfYZFtPe94e5c1lq2mE0yxk1iUJV9hGbhZwd5HAFw+WLkap95u1TMzuDff0
+      hksv+9ZrCMkychbXSiOCGuwR+1MMJUPFvTlf
+      -----END CERTIFICATE-----
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: "2022-09-07T10:57:03Z"
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:ca.crt: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: "2022-09-07T10:57:03Z"
+    name: kube-root-ca.crt
+    namespace: crossplane-system
+    resourceVersion: "5125604"
+    uid: 8bea7570-652a-4aa5-b114-3c7cfae4951b
+- apiVersion: v1
+  data:
+    amfcfg.yaml: "info:\n  version: 1.0.2\n  description: AMF initial local configuration\n\nconfiguration:\n
+      \ ngapIpList:\n    - 10.100.50.249\n  sbi:\n    scheme: http\n    registerIPv4:
+      amf-namf # IP used to register to NRF\n    bindingIPv4: 0.0.0.0  # IP used to
+      bind the service\n    port: 80\n  \n  nrfUri: http://nrf-nnrf:8000\n  amfName:
+      AMF\n  serviceNameList:\n    - namf-comm\n    - namf-evts\n    - namf-mt\n    -
+      namf-loc\n    - namf-oam\n  servedGuamiList:\n    - plmnId:\n        mcc: 208\n
+      \       mnc: 93\n      amfId: cafe00\n  supportTaiList:\n    - plmnId:\n        mcc:
+      208\n        mnc: 93\n      tac: 1\n  plmnSupportList:\n    - plmnId:\n        mcc:
+      208\n        mnc: 93\n      snssaiList:\n        - sst: 1\n          sd: 010203\n
+      \       - sst: 1\n          sd: 112233\n  supportDnnList:\n    - internet\n
+      \ security:\n    integrityOrder:\n      - NIA2\n    cipheringOrder:\n      -
+      NEA0\n  networkName:\n    full: free5GC\n    short: free      \n  locality:
+      area1 # Name of the location where a set of AMF, SMF and UPFs are located\n
+      \ networkFeatureSupport5GS: # 5gs Network Feature Support IE, refer to TS 24.501\n
+      \   enable: true # append this IE in Registration accept or not\n    imsVoPS:
+      0 # IMS voice over PS session indicator (uinteger, range: 0~1)\n    emc: 0 #
+      Emergency service support indicator for 3GPP access (uinteger, range: 0~3)\n
+      \   emf: 0 # Emergency service fallback indicator for 3GPP access (uinteger,
+      range: 0~3)\n    iwkN26: 0 # Interworking without N26 interface indicator (uinteger,
+      range: 0~1)\n    mpsi: 0 # MPS indicator (uinteger, range: 0~1)\n    emcN3:
+      0 # Emergency service support indicator for Non-3GPP access (uinteger, range:
+      0~1)\n    mcsi: 0 # MCS indicator (uinteger, range: 0~1)\n  t3502Value: 720\n
+      \ t3512Value: 3600\n  non3gppDeregistrationTimerValue: 3240\n  # retransmission
+      timer for paging message\n  t3513:\n    enable: true     # true or false\n    expireTime:
+      6s   # default is 6 seconds\n    maxRetryTimes: 4 # the max number of retransmission\n
+      \ # retransmission timer for NAS Registration Accept message\n  t3522:\n    enable:
+      true     # true or false\n    expireTime: 6s   # default is 6 seconds\n    maxRetryTimes:
+      4 # the max number of retransmission\n  # retransmission timer for NAS Registration
+      Accept message\n  t3550:\n    enable: true     # true or false\n    expireTime:
+      6s   # default is 6 seconds\n    maxRetryTimes: 4 # the max number of retransmission\n
+      \ # retransmission timer for NAS Authentication Request/Security Mode Command
+      message\n  t3560:\n    enable: true     # true or false\n    expireTime: 6s
+      \  # default is 6 seconds\n    maxRetryTimes: 4 # the max number of retransmission\n
+      \ # retransmission timer for NAS Notification message\n  t3565:\n    enable:
+      true     # true or false\n    expireTime: 6s   # default is 6 seconds\n    maxRetryTimes:
+      4 # the max number of retransmission\n\nlogger:\n  AMF:\n    ReportCaller: false\n
+      \   debugLevel: info\n  Aper:\n    ReportCaller: false\n    debugLevel: info\n
+      \ FSM:\n    ReportCaller: false\n    debugLevel: info\n  NAS:\n    ReportCaller:
+      false\n    debugLevel: info\n  NGAP:\n    ReportCaller: false\n    debugLevel:
+      info\n  OpenApi:\n    ReportCaller: false\n    debugLevel: info\n  PathUtil:\n
+      \   ReportCaller: false\n    debugLevel: info\n"
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: free5gc
+      meta.helm.sh/release-namespace: default
+    creationTimestamp: "2022-08-25T12:30:10Z"
+    labels:
+      app: free5gc
+      app.kubernetes.io/managed-by: Helm
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:amfcfg.yaml: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+      manager: helm
+      operation: Update
+      time: "2022-08-25T12:30:10Z"
+    name: amf-configmap
+    namespace: default
+    resourceVersion: "3771363"
+    uid: dc7d3528-1e19-47a9-9704-dc4800dde327
+- apiVersion: v1
+  data:
+    ausfcfg.yaml: "info:\n  version: 1.0.0\n  description: AUSF initial local configuration\n\nconfiguration:\n
+      \ sbi:\n    scheme: http\n    registerIPv4: ausf-nausf # IP used to register
+      to NRF\n    bindingIPv4: 0.0.0.0  # IP used to bind the service\n    port: 80\n
+      \ \n  nrfUri: http://nrf-nnrf:8000\n  serviceNameList:\n    - nausf-auth      \n
+      \ plmnSupportList:\n    - mcc: 208\n      mnc: 93\n    - mcc: 123\n      mnc:
+      45\n  groupId: ausfGroup001\n\nlogger:\n  AUSF:\n    ReportCaller: false\n    debugLevel:
+      info\n  OpenApi:\n    ReportCaller: false\n    debugLevel: info\n  PathUtil:\n
+      \   ReportCaller: false\n    debugLevel: info\n"
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: free5gc
+      meta.helm.sh/release-namespace: default
+    creationTimestamp: "2022-08-25T12:30:10Z"
+    labels:
+      app: free5gc
+      app.kubernetes.io/managed-by: Helm
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:ausfcfg.yaml: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+      manager: helm
+      operation: Update
+      time: "2022-08-25T12:30:10Z"
+    name: ausf-configmap
+    namespace: default
+    resourceVersion: "3771364"
+    uid: 39ad3a6f-8bb4-4312-8312-be10798da85c
+- apiVersion: v1
+  data:
+    gnb-config.yaml: |
+      mcc: '208' # Mobile Country Code value
+      mnc: '93'  # Mobile Network Code value (2 or 3 digits)
+      nci: '0x000000010'  # NR Cell Identity (36-bit)
+      idLength: 32        # NR gNB ID length in bits [22...32]
+      tac: 1     # Tracking Area Code
+      # List of supported S-NSSAIs by this gNB
+      slices:
+        - sst: 0x1
+          sd: 0x010203
+      # Indicates whether or not SCTP stream number errors should be ignored.
+      ignoreStreamIds: true
+
+      linkIp: 0.0.0.0   # gNB's local IP address for Radio Link Simulation (Usually same with local IP)
+      # gNB's local IP address for N2 Interface (Usually same with local IP)
+      ngapIp: 10.100.50.250
+      gtpIp: 10.100.50.236    # gNB's local IP address for N3 Interface (Usually same with local IP)
+
+      # List of AMF address information
+      amfConfigs:
+        - address: 10.100.50.249
+          port: 38412
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: ueransim
+      meta.helm.sh/release-namespace: default
+    creationTimestamp: "2022-08-25T12:55:57Z"
+    labels:
+      app: ueransim
+      app.kubernetes.io/managed-by: Helm
+      component: gnb
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:gnb-config.yaml: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:component: {}
+      manager: helm
+      operation: Update
+      time: "2022-08-25T12:55:57Z"
+    name: gnb-configmap
+    namespace: default
+    resourceVersion: "3773750"
+    uid: 95bbdfd7-d0ae-4e15-8fae-138b78ba87ce
+- apiVersion: v1
+  data:
+    ca.crt: |
+      -----BEGIN CERTIFICATE-----
+      MIIC5zCCAc+gAwIBAgIBADANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDEwprdWJl
+      cm5ldGVzMB4XDTIyMDcyMDA0NTI1MloXDTMyMDcxNzA0NTI1MlowFTETMBEGA1UE
+      AxMKa3ViZXJuZXRlczCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALSu
+      8tn5qu4OjQr38oa5ZctVFuVdxJNZvxBcDS3NrGL/+lDelyNBisi0L2IL8UEniPIv
+      ELbR0um7Qrj6JslQWKVF8vSDKyMwcCNAn1UcDqZWSYIzlPNWVZjtTm6NdttIb31o
+      f/Oq+xAcNVeVmbqZ5YOORuqLV0YeS1+EWZFxAeNYd0Jk3EVX6co1cvmZwzNJWQst
+      8dYyQEYORbzL7B2hBY8OWpjxuG/cgd2pqAVulYNc7eHUxmryCKII8wtccJEmqvZu
+      rOF2ahkE22dGOtDoxJOMpJEBri8soUzmM5WHRj+2cyvV4gAhgHhkFS8I5rumefNK
+      q77CaiFJFXMXoMTqzbsCAwEAAaNCMEAwDgYDVR0PAQH/BAQDAgKkMA8GA1UdEwEB
+      /wQFMAMBAf8wHQYDVR0OBBYEFKcVvp4/r5k422vc+b/mRAMiZHh4MA0GCSqGSIb3
+      DQEBCwUAA4IBAQC0f43tA+ALko7sSH4mWY3F5nr2KSoto472J9nGJNCB1ad/ccOC
+      0Dq6Z5NOWNjaQnYBSjKAUfYtmvH24TasXMqhrvxVzTnMdTnov3l116Rxy6nW1r5/
+      D+LxhUCDxY9GV5TSZk2d9BlVDR5UyLgO4uzLqwTZHQJuvCfu5RDF4cZIrLoeoL2q
+      6Z7T5raytFgpmE3Q8LVRuZ1gKgFtpaXV8H9BhS3NgqePysgzMrcXxh/b7mS7hOBh
+      7m76aNfYZFtPe94e5c1lq2mE0yxk1iUJV9hGbhZwd5HAFw+WLkap95u1TMzuDff0
+      hksv+9ZrCMkychbXSiOCGuwR+1MMJUPFvTlf
+      -----END CERTIFICATE-----
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: "2022-07-20T04:53:16Z"
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:ca.crt: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: "2022-07-20T04:53:16Z"
+    name: kube-root-ca.crt
+    namespace: default
+    resourceVersion: "363"
+    uid: 378ff026-f241-4713-a66e-4ba9a1074561
+- apiVersion: v1
+  data:
+    mongo_initdb_database: free5gc
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: free5gc
+      meta.helm.sh/release-namespace: default
+    creationTimestamp: "2022-08-25T12:30:10Z"
+    labels:
+      app.kubernetes.io/managed-by: Helm
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:mongo_initdb_database: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/managed-by: {}
+      manager: helm
+      operation: Update
+      time: "2022-08-25T12:30:10Z"
+    name: mongodb-config
+    namespace: default
+    resourceVersion: "3771359"
+    uid: 5d6179fb-274c-4932-a3d8-675e47304f20
+- apiVersion: v1
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: free5gc
+      meta.helm.sh/release-namespace: default
+    creationTimestamp: "2022-08-25T12:30:10Z"
+    labels:
+      app.kubernetes.io/managed-by: Helm
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/managed-by: {}
+      manager: helm
+      operation: Update
+      time: "2022-08-25T12:30:10Z"
+    name: mongodb-data
+    namespace: default
+    resourceVersion: "3771357"
+    uid: ef086284-2540-477d-ad2e-d47064f56d5b
+- apiVersion: v1
+  data:
+    nrfcfg.yaml: |
+      info:
+        version: 1.0.0
+        description: NRF initial local configuration
+
+      configuration:
+        MongoDBName: free5gc
+        MongoDBUrl: mongodb://mongodb:27017
+        sbi:
+          scheme: http
+          registerIPv4: nrf-nnrf # IP used to serve NFs or register to another NRF
+          bindingIPv4: 0.0.0.0  # IP used to bind the service
+          port: 8000
+        DefaultPlmnId:
+          mcc: 208
+          mnc: 93
+        serviceNameList:
+          - nnrf-nfm
+          - nnrf-disc
+
+      logger:
+        MongoDBLibrary:
+          ReportCaller: false
+          debugLevel: info
+        NRF:
+          ReportCaller: false
+          debugLevel: info
+        OpenApi:
+          ReportCaller: false
+          debugLevel: info
+        PathUtil:
+          ReportCaller: false
+          debugLevel: info
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: free5gc
+      meta.helm.sh/release-namespace: default
+    creationTimestamp: "2022-08-25T12:30:10Z"
+    labels:
+      app: free5gc
+      app.kubernetes.io/managed-by: Helm
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:nrfcfg.yaml: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+      manager: helm
+      operation: Update
+      time: "2022-08-25T12:30:10Z"
+    name: nrf-configmap
+    namespace: default
+    resourceVersion: "3771358"
+    uid: ff0b1436-d922-4b22-8e56-ec8495c694d8
+- apiVersion: v1
+  data:
+    nssfcfg.yaml: "info:\n  version: 1.0.0\n  description: NSSF initial local configuration\n\nconfiguration:\n
+      \ sbi:\n    scheme: http\n    registerIPv4: nssf-nnssf # IP used to register
+      to NRF\n    bindingIPv4: 0.0.0.0  # IP used to bind the service\n    port: 80\n
+      \ \n  nrfUri: http://nrf-nnrf:8000\n  \n  nsiList:\n    - snssai:\n        sst:
+      1\n      nsiInformationList:\n        - nrfId: http://nrf-nnrf:8000/nnrf-nfm/v1/nf-instances\n
+      \         nsiId: 10\n    - snssai:\n        sst: 1\n        sd: 1\n      nsiInformationList:\n
+      \       - nrfId: http://nrf-nnrf:8000/nnrf-nfm/v1/nf-instances\n          nsiId:
+      11\n    - snssai:\n        sst: 1\n        sd: 2\n      nsiInformationList:\n
+      \       - nrfId: http://nrf-nnrf:8000/nnrf-nfm/v1/nf-instances\n          nsiId:
+      12\n        - nrfId: http://nrf-nnrf:8000/nnrf-nfm/v1/nf-instances\n          nsiId:
+      12\n    - snssai:\n        sst: 1\n        sd: 3\n      nsiInformationList:\n
+      \       - nrfId: http://nrf-nnrf:8000/nnrf-nfm/v1/nf-instances\n          nsiId:
+      13\n    - snssai:\n        sst: 2\n      nsiInformationList:\n        - nrfId:
+      http://nrf-nnrf:8000/nnrf-nfm/v1/nf-instances\n          nsiId: 20\n    - snssai:\n
+      \       sst: 2\n        sd: 1\n      nsiInformationList:\n        - nrfId: http://nrf-nnrf:8000/nnrf-nfm/v1/nf-instances\n
+      \         nsiId: 21\n    - snssai:\n        sst: 1\n        sd: 010203\n      nsiInformationList:\n
+      \       - nrfId: http://nrf-nnrf:8000/nnrf-nfm/v1/nf-instances\n          nsiId:
+      22\n  amfSetList:\n    - amfSetId: 1\n      amfList:\n        - ffa2e8d7-3275-49c7-8631-6af1df1d9d26\n
+      \       - 0e8831c3-6286-4689-ab27-1e2161e15cb1\n        - a1fba9ba-2e39-4e22-9c74-f749da571d0d\n
+      \     nrfAmfSet: http://nrf-nnrf:8081/nnrf-nfm/v1/nf-instances\n      supportedNssaiAvailabilityData:\n
+      \       - tai:\n            plmnId:\n              mcc: 466\n              mnc:
+      92\n            tac: 33456\n          supportedSnssaiList:\n            - sst:
+      1\n              sd: 1\n            - sst: 1\n              sd: 2\n            -
+      sst: 2\n              sd: 1\n        - tai:\n            plmnId:\n              mcc:
+      466\n              mnc: 92\n            tac: 33457\n          supportedSnssaiList:\n
+      \           - sst: 1\n            - sst: 1\n              sd: 1\n            -
+      sst: 1\n              sd: 2\n    - amfSetId: 2\n      nrfAmfSet: http://nrf-nnrf:8084/nnrf-nfm/v1/nf-instances\n
+      \     supportedNssaiAvailabilityData:\n        - tai:\n            plmnId:\n
+      \             mcc: 466\n              mnc: 92\n            tac: 33456\n          supportedSnssaiList:\n
+      \           - sst: 1\n            - sst: 1\n              sd: 1\n            -
+      sst: 1\n              sd: 3\n            - sst: 2\n              sd: 1\n        -
+      tai:\n            plmnId:\n              mcc: 466\n              mnc: 92\n            tac:
+      33458\n          supportedSnssaiList:\n            - sst: 1\n            - sst:
+      1\n              sd: 1\n            - sst: 2\n  nssfName: NSSF\n  serviceNameList:\n
+      \   - nnssf-nsselection\n    - nnssf-nssaiavailability\n  supportedPlmnList:\n
+      \   - mcc: 208\n      mnc: 93\n  supportedNssaiInPlmnList:\n    - plmnId:\n
+      \       mcc: 208\n        mnc: 93\n      supportedSnssaiList:\n        - sst:
+      1\n          sd: 010203\n        - sst: 1\n          sd: 112233\n        - sst:
+      1\n          sd: 3\n        - sst: 2\n          sd: 1\n        - sst: 2\n          sd:
+      2\n  amfList:\n    - nfId: 469de254-2fe5-4ca0-8381-af3f500af77c\n      supportedNssaiAvailabilityData:\n
+      \       - tai:\n            plmnId:\n              mcc: 466\n              mnc:
+      92\n            tac: 33456\n          supportedSnssaiList:\n            - sst:
+      1\n            - sst: 1\n              sd: 2\n            - sst: 2\n        -
+      tai:\n            plmnId:\n              mcc: 466\n              mnc: 92\n            tac:
+      33457\n          supportedSnssaiList:\n            - sst: 1\n              sd:
+      1\n            - sst: 1\n              sd: 2\n    - nfId: fbe604a8-27b2-417e-bd7c-8a7be2691f8d\n
+      \     supportedNssaiAvailabilityData:\n        - tai:\n            plmnId:\n
+      \             mcc: 466\n              mnc: 92\n            tac: 33458\n          supportedSnssaiList:\n
+      \           - sst: 1\n            - sst: 1\n              sd: 1\n            -
+      sst: 1\n              sd: 3\n            - sst: 2\n        - tai:\n            plmnId:\n
+      \             mcc: 466\n              mnc: 92\n            tac: 33459\n          supportedSnssaiList:\n
+      \           - sst: 1\n            - sst: 1\n              sd: 1\n            -
+      sst: 2\n            - sst: 2\n              sd: 1\n    - nfId: b9e6e2cb-5ce8-4cb6-9173-a266dd9a2f0c\n
+      \     supportedNssaiAvailabilityData:\n        - tai:\n            plmnId:\n
+      \             mcc: 466\n              mnc: 92\n            tac: 33456\n          supportedSnssaiList:\n
+      \           - sst: 1\n            - sst: 1\n              sd: 1\n            -
+      sst: 1\n              sd: 2\n            - sst: 2\n        - tai:\n            plmnId:\n
+      \             mcc: 466\n              mnc: 92\n            tac: 33458\n          supportedSnssaiList:\n
+      \           - sst: 1\n            - sst: 1\n              sd: 1\n            -
+      sst: 2\n            - sst: 2\n              sd: 1\n  taList:\n    - tai:\n        plmnId:\n
+      \         mcc: 466\n          mnc: 92\n        tac: 33456\n      accessType:
+      3GPP_ACCESS\n      supportedSnssaiList:\n        - sst: 1\n        - sst: 1\n
+      \         sd: 1\n        - sst: 1\n          sd: 2\n        - sst: 2\n    -
+      tai:\n        plmnId:\n          mcc: 466\n          mnc: 92\n        tac: 33457\n
+      \     accessType: 3GPP_ACCESS\n      supportedSnssaiList:\n        - sst: 1\n
+      \       - sst: 1\n          sd: 1\n        - sst: 1\n          sd: 2\n        -
+      sst: 2\n    - tai:\n        plmnId:\n          mcc: 466\n          mnc: 92\n
+      \       tac: 33458\n      accessType: 3GPP_ACCESS\n      supportedSnssaiList:\n
+      \       - sst: 1\n        - sst: 1\n          sd: 1\n        - sst: 1\n          sd:
+      3\n        - sst: 2\n      restrictedSnssaiList:\n        - homePlmnId:\n            mcc:
+      310\n            mnc: 560\n          sNssaiList:\n            - sst: 1\n              sd:
+      3\n    - tai:\n        plmnId:\n          mcc: 466\n          mnc: 92\n        tac:
+      33459\n      accessType: 3GPP_ACCESS\n      supportedSnssaiList:\n        -
+      sst: 1\n        - sst: 1\n          sd: 1\n        - sst: 2\n        - sst:
+      2\n          sd: 1\n      restrictedSnssaiList:\n        - homePlmnId:\n            mcc:
+      310\n            mnc: 560\n          sNssaiList:\n            - sst: 2\n              sd:
+      1\n  mappingListFromPlmn:\n    - operatorName: NTT Docomo\n      homePlmnId:\n
+      \       mcc: 440\n        mnc: 10\n      mappingOfSnssai:\n        - servingSnssai:\n
+      \           sst: 1\n            sd: 1\n          homeSnssai:\n            sst:
+      1\n            sd: 1\n        - servingSnssai:\n            sst: 1\n            sd:
+      2\n          homeSnssai:\n            sst: 1\n            sd: 3\n        - servingSnssai:\n
+      \           sst: 1\n            sd: 3\n          homeSnssai:\n            sst:
+      1\n            sd: 4\n        - servingSnssai:\n            sst: 2\n            sd:
+      1\n          homeSnssai:\n            sst: 2\n            sd: 2\n    - operatorName:
+      AT&T Mobility\n      homePlmnId:\n        mcc: 310\n        mnc: 560\n      mappingOfSnssai:\n
+      \       - servingSnssai:\n            sst: 1\n            sd: 1\n          homeSnssai:\n
+      \           sst: 1\n            sd: 2\n        - servingSnssai:\n            sst:
+      1\n            sd: 2\n          homeSnssai:\n            sst: 1\n            sd:
+      3      \n\nlogger:\n  NSSF:\n    ReportCaller: false\n    debugLevel: info\n
+      \ OpenApi:\n    ReportCaller: false\n    debugLevel: info\n  PathUtil:\n    ReportCaller:
+      false\n    debugLevel: info\n"
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: free5gc
+      meta.helm.sh/release-namespace: default
+    creationTimestamp: "2022-08-25T12:30:10Z"
+    labels:
+      app: free5gc
+      app.kubernetes.io/managed-by: Helm
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:nssfcfg.yaml: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+      manager: helm
+      operation: Update
+      time: "2022-08-25T12:30:10Z"
+    name: nssf-configmap
+    namespace: default
+    resourceVersion: "3771356"
+    uid: a7c06817-f820-4720-9033-06c1ed84e2d8
+- apiVersion: v1
+  data:
+    pcfcfg.yaml: "info:\n  version: 1.0.0\n  description: PCF initial local configuration\n\nconfiguration:\n
+      \ sbi:\n    scheme: http\n    registerIPv4: pcf-npcf # IP used to register to
+      NRF\n    bindingIPv4: 0.0.0.0  # IP used to bind the service\n    port: 80\n
+      \ \n  mongodb:       # the mongodb connected by this PCF\n    name: free5gc
+      \                 # name of the mongodb\n    url: mongodb://mongodb:27017 #
+      a valid URL of the mongodb\n  \n  nrfUri: http://nrf-nnrf:8000\n  pcfName: PCF\n
+      \ timeFormat: 2019-01-02 15:04:05\n  defaultBdtRefId: BdtPolicyId-\n  serviceList:\n
+      \   - serviceName: npcf-am-policy-control\n    - serviceName: npcf-smpolicycontrol\n
+      \     suppFeat: 3fff\n    - serviceName: npcf-bdtpolicycontrol\n    - serviceName:
+      npcf-policyauthorization\n      suppFeat: 3\n    - serviceName: npcf-eventexposure\n
+      \   - serviceName: npcf-ue-policy-control\n\nlogger:\n  OpenApi:\n    ReportCaller:
+      false\n    debugLevel: info\n  PCF:\n    ReportCaller: false\n    debugLevel:
+      info\n  PathUtil:\n    ReportCaller: false\n    debugLevel: info\n"
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: free5gc
+      meta.helm.sh/release-namespace: default
+    creationTimestamp: "2022-08-25T12:30:10Z"
+    labels:
+      app: free5gc
+      app.kubernetes.io/managed-by: Helm
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:pcfcfg.yaml: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+      manager: helm
+      operation: Update
+      time: "2022-08-25T12:30:10Z"
+    name: pcf-configmap
+    namespace: default
+    resourceVersion: "3771360"
+    uid: 721e6185-6e89-481e-bae1-0da322fae9db
+- apiVersion: v1
+  data:
+    smfcfg.yaml: "info:\n  version: 1.0.2\n  description: SMF initial local configuration\n\nconfiguration:\n
+      \ sbi:\n    scheme: http\n    registerIPv4: smf-nsmf # IP used to register to
+      NRF\n    bindingIPv4: 0.0.0.0  # IP used to bind the service\n    port: 80\n
+      \   tls:\n      key: free5gc/support/TLS/smf.key\n      pem: free5gc/support/TLS/smf.pem\n
+      \ \n  nrfUri: http://nrf-nnrf:8000\n\n  pfcp:\n    addr: 10.100.50.244\n  smfName:
+      SMF\n  serviceNameList:\n    - nsmf-pdusession\n    - nsmf-event-exposure\n
+      \   - nsmf-oam\n  snssaiInfos:\n    - sNssai:\n        sst: 1\n        sd: 010203\n
+      \     dnnInfos: # DNN information list\n        - dnn: internet # Data Network
+      Name\n          dns: # the IP address of DNS\n            ipv4: 8.8.8.8\n    -
+      sNssai:\n        sst: 1\n        sd: 112233\n      dnnInfos: # DNN information
+      list\n        - dnn: internet # Data Network Name\n          dns: # the IP address
+      of DNS\n            ipv4: 8.8.8.8\n    - sNssai:\n        sst: 2\n        sd:
+      112234    \n      dnnInfos:\n        - dnn: internet\n          dns: \n            ipv4:
+      8.8.8.8\n  plmnList: # the list of PLMN IDs that this SMF belongs to (optional,
+      remove this key when unnecessary)\n    - mcc: \"208\" # Mobile Country Code
+      (3 digits string, digit: 0~9)\n      mnc: \"93\" # Mobile Network Code (2 or
+      3 digits string, digit: 0~9)\n  userplane_information: # list of userplane information\n
+      \   up_nodes: # information of userplane node (AN or UPF)\n      gNB1: # the
+      name of the node\n        type: AN # the type of the node (AN or UPF)\n      UPF:
+      \ # the name of the node\n        type: UPF # the type of the node (AN or UPF)\n
+      \       node_id: 10.100.50.241 # the IP/FQDN of N4 interface on this UPF (PFCP)\n
+      \       sNssaiUpfInfos: # S-NSSAI information list for this UPF\n              -
+      sNssai: # S-NSSAI (Single Network Slice Selection Assistance Information)\n
+      \                 sst: 1 # Slice/Service Type (uinteger, range: 0~255)\n                  sd:
+      010203 # Slice Differentiator (3 bytes hex string, range: 000000~FFFFFF)\n                dnnUpfInfoList:
+      # DNN information list for this S-NSSAI\n                  - dnn: internet\n
+      \                   pools:\n                      - cidr: 10.1.0.0/17\n              -
+      sNssai: # S-NSSAI (Single Network Slice Selection Assistance Information)\n
+      \                 sst: 1 # Slice/Service Type (uinteger, range: 0~255)\n                  sd:
+      112233 # Slice Differentiator (3 bytes hex string, range: 000000~FFFFFF)\n                dnnUpfInfoList:
+      # DNN information list for this S-NSSAI\n                  - dnn: internet\n
+      \                   pools:\n                      - cidr: 10.1.128.0/17 \n        interfaces:
+      # Interface list for this UPF\n              - interfaceType: N3 # the type
+      of the interface (N3 or N9)\n                endpoints: # the IP address of
+      this N3/N9 interface on this UPF\n                  - 10.100.50.233\n                networkInstance:
+      internet # Data Network Name (DNN)\n      UPF1:  # the name of the node\n        type:
+      UPF # the type of the node (AN or UPF)\n        node_id: 10.100.50.242 # the
+      IP/FQDN of N4 interface on this UPF (PFCP)\n        sNssaiUpfInfos: # S-NSSAI
+      information list for this UPF\n              - sNssai: # S-NSSAI (Single Network
+      Slice Selection Assistance Information)\n                  sst: 1 # Slice/Service
+      Type (uinteger, range: 0~255)\n                  sd: 010203 # Slice Differentiator
+      (3 bytes hex string, range: 000000~FFFFFF)\n                dnnUpfInfoList:
+      # DNN information list for this S-NSSAI\n                  - dnn: internet\n
+      \                   pools:\n                      - cidr: 10.2.0.0/17\n              -
+      sNssai: # S-NSSAI (Single Network Slice Selection Assistance Information)\n
+      \                 sst: 1 # Slice/Service Type (uinteger, range: 0~255)\n                  sd:
+      112233 # Slice Differentiator (3 bytes hex string, range: 000000~FFFFFF)\n                dnnUpfInfoList:
+      # DNN information list for this S-NSSAI\n                  - dnn: internet\n
+      \                   pools:\n                      - cidr: 10.2.128.0/17\n        interfaces:
+      # Interface list for this UPF\n              - interfaceType: N3 # the type
+      of the interface (N3 or N9)\n                endpoints: # the IP address of
+      this N3/N9 interface on this UPF\n                  - 10.100.50.234\n                networkInstance:
+      internet # Data Network Name (DNN)\n    links: # the topology graph of userplane,
+      A and B represent the two nodes of each link\n      - A: gNB1\n        B: UPF\n
+      \     - A: gNB1\n        B: UPF1\n  locality: area1 # Name of the location where
+      a set of AMF, SMF and UPFs are located\n\nlogger:\n  Aper:\n    ReportCaller:
+      false\n    debugLevel: info\n  NAS:\n    ReportCaller: false\n    debugLevel:
+      info\n  NGAP:\n    ReportCaller: false\n    debugLevel: info\n  OpenApi:\n    ReportCaller:
+      false\n    debugLevel: info\n  PFCP:\n    ReportCaller: false\n    debugLevel:
+      info\n  PathUtil:\n    ReportCaller: false\n    debugLevel: info\n  SMF:\n    ReportCaller:
+      false\n    debugLevel: info\n"
+    uerouting.yaml: "info:\n  version: 1.0.1\n  description: Routing information for
+      UE\nueRoutingInfo:\n  UE1: # Group Name\n    members:\n    - imsi-208930000000003
+      # Subscription Permanent Identifier of the UE\n    topology: # Network topology
+      for this group (Uplink: A->B, Downlink: B->A)\n    # default path derived from
+      this topology\n    # node name should be consistent with smfcfg.yaml\n      -
+      A: gNB1\n        B: UPF\n    specificPath:\n      - dest: 142.250.183.110 #
+      the destination IP address on Data Network (DN)\n        # the order of UPF
+      nodes in this path. We use the UPF's name to represent each UPF node.\n        #
+      The UPF's name should be consistent with smfcfg.yaml\n        path: [gNB1, UPF]\n
+      \ \n  UE2: # Group Name\n    members:\n    - imsi-208930000000004 # Subscription
+      Permanent Identifier of the UE\n    topology: # Network topology for this group
+      (Uplink: A->B, Downlink: B->A)\n    # default path derived from this topology\n
+      \   # node name should be consistent with smfcfg.yaml\n      - A: gNB1\n        B:
+      UPF1\n    specificPath:\n      - dest: 172.217.160.206 # the destination IP
+      address on Data Network (DN)\n        # the order of UPF nodes in this path.
+      We use the UPF's name to represent each UPF node.\n        # The UPF's name
+      should be consistent with smfcfg.yaml\n        path: [gNB1, UPF1]\n"
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: free5gc
+      meta.helm.sh/release-namespace: default
+    creationTimestamp: "2022-08-25T12:30:10Z"
+    labels:
+      app: free5gc
+      app.kubernetes.io/managed-by: Helm
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:smfcfg.yaml: {}
+          f:uerouting.yaml: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+      manager: helm
+      operation: Update
+      time: "2022-08-25T12:30:10Z"
+    name: smf-configmap
+    namespace: default
+    resourceVersion: "3771355"
+    uid: 3ef32d9e-485d-4cdc-9b3c-6254d7ef06ca
+- apiVersion: v1
+  data:
+    udmcfg.yaml: "info:\n  version: 1.0.1\n  description: UDM initial local configuration\n\nconfiguration:\n
+      \ sbi:\n    scheme: http\n    registerIPv4: udm-nudm # IP used to register to
+      NRF\n    bindingIPv4: 0.0.0.0  # IP used to bind the service\n    port: 80\n
+      \   tls:\n      log: free5gc/udmsslkey.log\n      pem: free5gc/support/TLS/udm.pem\n
+      \     key: free5gc/support/TLS/udm.key\n  \n  nrfUri: http://nrf-nnrf:8000\n
+      \ serviceNameList:\n    - nudm-sdm\n    - nudm-uecm\n    - nudm-ueau\n    -
+      nudm-ee\n    - nudm-pp\n  \n  # test data set from TS33501-f60 Annex C.4\n  SuciProfile:\n
+      \   - ProtectionScheme: 1 # Protect Scheme: Profile A\n      PrivateKey: c53c22208b61860b06c62e5406a7b330c2b577aa5558981510d128247d38bd1d\n
+      \     PublicKey: 5a8d38864820197c3394b92613b20b91633cbd897119273bf8e4a6f4eec0a650\n
+      \   - ProtectionScheme: 2 # Protect Scheme: Profile B\n      PrivateKey: F1AB1074477EBCC7F554EA1C5FC368B1616730155E0041AC447D6301975FECDA\n
+      \     PublicKey: 0472DA71976234CE833A6907425867B82E074D44EF907DFB4B3E21C1C2256EBCD15A7DED52FCBB097A4ED250E036C7B9C8C7004C4EEDC4F068CD7BF8D3F900E3B4\n\nlogger:\n
+      \ OpenApi:\n    ReportCaller: false\n    debugLevel: info\n  PathUtil:\n    ReportCaller:
+      false\n    debugLevel: info\n  UDM:\n    ReportCaller: false\n    debugLevel:
+      info\n"
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: free5gc
+      meta.helm.sh/release-namespace: default
+    creationTimestamp: "2022-08-25T12:30:10Z"
+    labels:
+      app: free5gc
+      app.kubernetes.io/managed-by: Helm
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:udmcfg.yaml: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+      manager: helm
+      operation: Update
+      time: "2022-08-25T12:30:10Z"
+    name: udm-configmap
+    namespace: default
+    resourceVersion: "3771366"
+    uid: 73ec4a08-2756-4967-ac0e-41d4961d8ae2
+- apiVersion: v1
+  data:
+    udrcfg.yaml: "info:\n  version: 1.0.0\n  description: UDR initial local configuration\n\nconfiguration:\n
+      \ sbi:\n    scheme: http\n    registerIPv4: udr-nudr # IP used to register to
+      NRF\n    bindingIPv4: 0.0.0.0  # IP used to bind the service\n    port: 80\n\n
+      \ mongodb:\n    name: free5gc\n    url: mongodb://mongodb:27017       \n  \n
+      \ nrfUri: http://nrf-nnrf:8000\n\nlogger:\n  MongoDBLibrary:\n    ReportCaller:
+      false\n    debugLevel: info\n  OpenApi:\n    ReportCaller: false\n    debugLevel:
+      info\n  PathUtil:\n    ReportCaller: false\n    debugLevel: info\n  UDR:\n    ReportCaller:
+      false\n    debugLevel: info\n"
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: free5gc
+      meta.helm.sh/release-namespace: default
+    creationTimestamp: "2022-08-25T12:30:10Z"
+    labels:
+      app: free5gc
+      app.kubernetes.io/managed-by: Helm
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:udrcfg.yaml: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+      manager: helm
+      operation: Update
+      time: "2022-08-25T12:30:10Z"
+    name: udr-configmap
+    namespace: default
+    resourceVersion: "3771361"
+    uid: 6a1a24f4-88c0-4e7d-b887-5fc5416d114b
+- apiVersion: v1
+  data:
+    ue-config.yaml: |
+      supi: "imsi-208930000000003"  # IMSI number
+      mcc: '208' # Mobile Country Code value
+      mnc: '93' # Mobile Network Code value (2 or 3 digits)
+      key: "8baf473f2f8fd09487cccbd7097c6862" # Operator code (OP or OPC) of the UE
+      op: "8e27b6af0e692e750f32667a3b14605d" # This value specifies the OP type and it can be either 'OP' or 'OPC'
+      opType: "OPC" # This value specifies the OP type and it can be either 'OP' or 'OPC'
+      amf: '8000' # Authentication Management Field (AMF) value
+      imei: '356938035643803' # IMEI number of the device
+      imeiSv: '4370816125816151'
+      # UAC Access Identities Configuration
+      uacAic:
+        mps: false
+        mcs: false
+      # UAC Access Control Class
+      uacAcc:
+        normalClass: 0
+        class11: false
+        class12: false
+        class13: false
+        class14: false
+        class15: false
+      sessions:
+        - type: "IPv4"
+          apn: "internet"
+          slice:
+            sst: 0x01
+            sd: 0x010203
+      # Configured NSSAI for this UE by HPLMN
+      configured-nssai:
+        - sst: 0x01
+          sd: 0x010203
+      # Default Configured NSSAI for this UE
+      default-nssai:
+        - sst: 1
+          sd: 1
+      # Supported encryption and integrity algorithms by this UE
+      integrity:
+        IA1: true
+        IA2: true
+        IA3: true
+      ciphering:
+        EA1: true
+        EA2: true
+        EA3: true
+      # Integrity protection maximum data rate for user plane
+      integrityMaxRate:
+        uplink: 'full'
+        downlink: 'full'
+
+      # List of gNB IP addresses for Radio Link Simulation
+      gnbSearchList:
+        - gnb-service
+    wrapper.sh: |
+      #!/bin/bash
+
+      mkdir /dev/net
+      mknod /dev/net/tun c 10 200
+
+      ./nr-ue -c ../config/ue-config.yaml
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: ueransim
+      meta.helm.sh/release-namespace: default
+    creationTimestamp: "2022-08-25T12:55:57Z"
+    labels:
+      app: ueransim
+      app.kubernetes.io/managed-by: Helm
+      component: ue
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:ue-config.yaml: {}
+          f:wrapper.sh: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:component: {}
+      manager: helm
+      operation: Update
+      time: "2022-08-25T12:55:57Z"
+    name: ue-configmap
+    namespace: default
+    resourceVersion: "3773749"
+    uid: cf7c34c9-17b6-44dc-9524-cb1c204798a7
+- apiVersion: v1
+  data:
+    upfcfg.yaml: |
+      info:
+        version: 1.0.0
+        description: UPF configuration
+
+      configuration:
+        ReportCaller: false
+        debugLevel: info
+        dnn_list:
+        - cidr: 10.1.0.0/17
+          dnn: internet
+          natifname: n6
+
+        pfcp:
+          - addr: 10.100.50.241
+
+        gtpu:
+          - addr: 10.100.50.233
+          # [optional] gtpu.name
+          # - name: upf.5gc.nctu.me
+          # [optional] gtpu.ifname
+          # - ifname: gtpif
+    wrapper.sh: "#!/bin/sh\n\n### Implement networking rules\niptables -A FORWARD
+      -j ACCEPT\niptables -t nat -A POSTROUTING -s 10.1.0.0/16 -o eth0 -j MASQUERADE
+      \ # route traffic comming from the UE SUBNET to the interface N6    \necho \"1200
+      n6if\" >> /etc/iproute2/rt_tables # create a routing table for the interface
+      N6\nip rule add from 10.1.0.0/16 table n6if   # use the created ip table to
+      route the traffic comming from the UE SUBNET \nip route add default via 172.31.1.1
+      dev n6 table n6if  # add a default route in the created table so that all UEs
+      will use this gateway for external communications (target IP not in the Data
+      Network attached to the interface N6) and then the Data Network will manage
+      to route the traffic\n\n/free5gc/free5gc-upfd/free5gc-upfd -f /free5gc/config//upfcfg.yaml\n"
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: free5gc
+      meta.helm.sh/release-namespace: default
+    creationTimestamp: "2022-08-25T12:30:10Z"
+    labels:
+      app: free5gc
+      app.kubernetes.io/managed-by: Helm
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:upfcfg.yaml: {}
+          f:wrapper.sh: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+      manager: helm
+      operation: Update
+      time: "2022-08-25T12:30:10Z"
+    name: upf-configmap
+    namespace: default
+    resourceVersion: "3771365"
+    uid: ba9cc126-65f9-4c52-8cdd-7235c2b9d937
+- apiVersion: v1
+  data:
+    webuicfg.yaml: "info:\n  version: 1.0.0\n  description: WEBUI initial local configuration\n\nconfiguration:\n
+      \ mongodb:\n    name: free5gc\n    url: mongodb://mongodb:27017\n    \nlogger:\n
+      \ MongoDBLibrary:\n    ReportCaller: false\n    debugLevel: info\n  OpenApi:\n
+      \   ReportCaller: false\n    debugLevel: info\n  PathUtil:\n    ReportCaller:
+      false\n    debugLevel: info\n  WEBUI:\n    ReportCaller: true\n    debugLevel:
+      info\n"
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: free5gc
+      meta.helm.sh/release-namespace: default
+    creationTimestamp: "2022-08-25T12:30:10Z"
+    labels:
+      app: free5gc
+      app.kubernetes.io/managed-by: Helm
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:webuicfg.yaml: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+      manager: helm
+      operation: Update
+      time: "2022-08-25T12:30:10Z"
+    name: webui-configmap
+    namespace: default
+    resourceVersion: "3771362"
+    uid: b69a00d8-99ac-42b0-826f-1c9f46607c18
+- apiVersion: v1
+  data:
+    api_proxy_target: http://emco-gui.emco:9080
+    mongodb_host: emco-mongo.emco:27017
+    node_env: production
+    ui_proxy_target: http://emco-gui.emco:9080
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco-gui
+      meta.helm.sh/release-namespace: emco
+    creationTimestamp: "2022-09-02T09:54:09Z"
+    labels:
+      app.kubernetes.io/managed-by: Helm
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:api_proxy_target: {}
+          f:mongodb_host: {}
+          f:node_env: {}
+          f:ui_proxy_target: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/managed-by: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:54:09Z"
+    name: authgw-configmap
+    namespace: emco
+    resourceVersion: "4600166"
+    uid: d9349db0-b8fe-4f3d-aec4-3530356ec1b4
+- apiVersion: v1
+  data:
+    config.json: |-
+      {
+          "database-type": "mongo",
+          "database-ip": "emco-mongo",
+          "etcd-ip": "emco-etcd",
+          "service-port": "9036",
+          "log-level": "warn"
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco
+      meta.helm.sh/release-namespace: emco
+    creationTimestamp: "2022-09-02T09:36:36Z"
+    labels:
+      app: ca-certs
+      app.kubernetes.io/managed-by: Helm
+      chart: ca-certs-1.0.0
+      heritage: Helm
+      release: emco
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:config.json: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:36:36Z"
+    name: emco-ca-certs
+    namespace: emco
+    resourceVersion: "4598015"
+    uid: 8d3605b7-0632-4941-91d6-2e100ef2e91a
+- apiVersion: v1
+  data:
+    config.json: |-
+      {
+          "database-type": "mongo",
+          "database-ip": "emco-mongo",
+          "etcd-ip": "emco-etcd",
+          "service-port": "9061",
+          "log-level": "warn"
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco
+      meta.helm.sh/release-namespace: emco
+    creationTimestamp: "2022-09-02T09:36:36Z"
+    labels:
+      app: clm
+      app.kubernetes.io/managed-by: Helm
+      chart: clm-1.0.0
+      heritage: Helm
+      release: emco
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:config.json: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:36:36Z"
+    name: emco-clm
+    namespace: emco
+    resourceVersion: "4598011"
+    uid: 3f04f693-3a7c-4ffa-af7e-8a8dc735b115
+- apiVersion: v1
+  data:
+    config.json: |
+      {
+
+          "database-type": "mongo",
+          "database-ip": "emco-mongo",
+          "etcd-ip": "emco-etcd",
+          "service-port": "9077",
+          "log-level": "warn"
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco
+      meta.helm.sh/release-namespace: emco
+    creationTimestamp: "2022-09-02T09:36:36Z"
+    labels:
+      app: dcm
+      app.kubernetes.io/managed-by: Helm
+      chart: dcm-1.0.0
+      heritage: Helm
+      release: emco
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:config.json: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:36:36Z"
+    name: emco-dcm
+    namespace: emco
+    resourceVersion: "4598017"
+    uid: 052bec60-afcb-40c8-ad15-6e2fc5dd3aca
+- apiVersion: v1
+  data:
+    config.json: |-
+      {
+          "database-type": "mongo",
+          "database-ip": "emco-mongo",
+          "etcd-ip": "emco-etcd",
+          "service-port": "9018",
+          "log-level": "warn"
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco
+      meta.helm.sh/release-namespace: emco
+    creationTimestamp: "2022-09-02T09:36:36Z"
+    labels:
+      app: dtc
+      app.kubernetes.io/managed-by: Helm
+      chart: dtc-1.0.0
+      heritage: Helm
+      release: emco
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:config.json: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:36:36Z"
+    name: emco-dtc
+    namespace: emco
+    resourceVersion: "4598021"
+    uid: 7482b3d2-1fb7-4cf2-85fb-bf0e463d0b7f
+- apiVersion: v1
+  data:
+    prestop-hook.sh: |-
+      #!/bin/bash
+
+      set -o errexit
+      set -o pipefail
+      set -o nounset
+
+      # Debug section
+      exec 3>&1
+      exec 4>&2
+
+      if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
+        echo "==> Bash debug is on"
+      else
+        echo "==> Bash debug is off"
+        exec 1>/dev/null
+        exec 2>/dev/null
+      fi
+
+      # Constants
+      AUTH_OPTIONS=""
+      export ETCDCTL_ENDPOINTS="emco-etcd-0.emco-etcd-headless.emco.svc.cluster.local:2379"
+
+      etcdctl $AUTH_OPTIONS member remove --debug=true "$(cat "$ETCD_DATA_DIR/member_id")" > "$(dirname "$ETCD_DATA_DIR")/member_removal.log" 2>&1
+    probes.sh: |-
+      #!/bin/bash
+
+      set -o errexit
+      set -o pipefail
+      set -o nounset
+
+      # Debug section
+      exec 3>&1
+      exec 4>&2
+
+      if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
+          echo "==> Bash debug is on"
+      else
+          echo "==> Bash debug is off"
+          exec 1>/dev/null
+          exec 2>/dev/null
+      fi
+
+      # Constants
+      AUTH_OPTIONS=""
+
+      echo "==> [DEBUG] Probing etcd cluster"
+      echo "==> [DEBUG] Probe command: \"etcdctl $AUTH_OPTIONS endpoint health\""
+      etcdctl $AUTH_OPTIONS endpoint health
+    setup.sh: |-
+      #!/bin/bash
+
+      set -o errexit
+      set -o pipefail
+      set -o nounset
+
+      # Debug section
+      exec 3>&1
+      exec 4>&2
+
+      if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
+          echo "==> Bash debug is on"
+      else
+          echo "==> Bash debug is off"
+          exec 1>/dev/null
+          exec 2>/dev/null
+      fi
+
+      # Constants
+      HOSTNAME="$(hostname -s)"
+      AUTH_OPTIONS=""
+      export ETCDCTL_ENDPOINTS="emco-etcd-0.emco-etcd-headless.emco.svc.cluster.local:2379"
+      export ROOT_PASSWORD="${ETCD_ROOT_PASSWORD:-}"
+      if [[ -n "${ETCD_ROOT_PASSWORD:-}" ]]; then
+        unset ETCD_ROOT_PASSWORD
+      fi
+      # Functions
+      ## Store member id for later member replacement
+      store_member_id() {
+          while ! etcdctl $AUTH_OPTIONS member list; do sleep 1; done
+          etcdctl $AUTH_OPTIONS member list | grep -w "$HOSTNAME" | awk '{ print $1}' | awk -F "," '{ print $1}' > "$ETCD_DATA_DIR/member_id"
+          echo "==> Stored member id: $(cat ${ETCD_DATA_DIR}/member_id)" 1>&3 2>&4
+          exit 0
+      }
+      ## Configure RBAC
+      configure_rbac() {
+          # When there's more than one replica, we can assume the 1st member
+          # to be created is "emco-etcd-0" since a statefulset is used
+          if [[ -n "${ROOT_PASSWORD:-}" ]] && [[ "$HOSTNAME" == "emco-etcd-0" ]]; then
+              echo "==> Configuring RBAC authentication!" 1>&3 2>&4
+              etcd &
+              ETCD_PID=$!
+              while ! etcdctl $AUTH_OPTIONS member list; do sleep 1; done
+              echo "$ROOT_PASSWORD" | etcdctl $AUTH_OPTIONS user add root --interactive=false
+              etcdctl $AUTH_OPTIONS auth enable
+              kill "$ETCD_PID"
+              sleep 5
+          fi
+      }
+      ## Checks whether there was a disaster or not
+      is_disastrous_failure() {
+          local endpoints_array=(${ETCDCTL_ENDPOINTS//,/ })
+          local active_endpoints=0
+          local -r min_endpoints=$(((1 + 1)/2))
+
+          for e in "${endpoints_array[@]}"; do
+              if [[ "$e" != "$ETCD_ADVERTISE_CLIENT_URLS" ]] && (unset -v ETCDCTL_ENDPOINTS; etcdctl $AUTH_OPTIONS  endpoint health --endpoints="$e"); then
+                  active_endpoints=$((active_endpoints + 1))
+              fi
+          done
+          if [[ $active_endpoints -lt $min_endpoints ]]; then
+              true
+          else
+              false
+          fi
+      }
+
+      ## Check whether the member was successfully removed from the cluster
+      should_add_new_member() {
+          return_value=0
+          if (grep -E "^Member[[:space:]]+[a-z0-9]+\s+removed\s+from\s+cluster\s+[a-z0-9]+$" "$(dirname "$ETCD_DATA_DIR")/member_removal.log") || \
+             ! ([[ -d "$ETCD_DATA_DIR/member/snap" ]] && [[ -f "$ETCD_DATA_DIR/member_id" ]]); then
+              rm -rf $ETCD_DATA_DIR/* 1>&3 2>&4
+          else
+              return_value=1
+          fi
+          rm -f "$(dirname "$ETCD_DATA_DIR")/member_removal.log" 1>&3 2>&4
+          return $return_value
+      }
+
+      if [[ ! -d "$ETCD_DATA_DIR" ]]; then
+          echo "==> Creating data dir..." 1>&3 2>&4
+          echo "==> There is no data at all. Initializing a new member of the cluster..." 1>&3 2>&4
+          store_member_id & 1>&3 2>&4
+          configure_rbac
+      else
+          echo "==> Detected data from previous deployments..." 1>&3 2>&4
+          if [[ $(stat -c "%a" "$ETCD_DATA_DIR") != *700 ]]; then
+              echo "==> Setting data directory permissions to 700 in a recursive way (required in etcd >=3.4.10)" 1>&3 2>&4
+              chmod -R 700 $ETCD_DATA_DIR
+          else
+              echo "==> The data directory is already configured with the proper permissions" 1>&3 2>&4
+          fi
+          if [[ 1 -eq 1 ]]; then
+              echo "==> Single node cluster detected!!" 1>&3 2>&4
+          elif is_disastrous_failure; then
+              echo "==> Cluster not responding!!" 1>&3 2>&4
+              echo "==> Disaster recovery is disabled, the cluster will try to recover on it's own..." 1>&3 2>&4
+          elif should_add_new_member; then
+              echo "==> Adding new member to existing cluster..." 1>&3 2>&4
+              etcdctl $AUTH_OPTIONS member add "$HOSTNAME" --peer-urls="http://${HOSTNAME}.emco-etcd-headless.emco.svc.cluster.local:2380" | grep "^ETCD_" > "$ETCD_DATA_DIR/new_member_envs"
+              sed -ie "s/^/export /" "$ETCD_DATA_DIR/new_member_envs"
+              echo "==> Loading env vars of existing cluster..." 1>&3 2>&4
+              source "$ETCD_DATA_DIR/new_member_envs" 1>&3 2>&4
+              store_member_id & 1>&3 2>&4
+          else
+              echo "==> Updating member in existing cluster..." 1>&3 2>&4
+              etcdctl $AUTH_OPTIONS member update "$(cat "$ETCD_DATA_DIR/member_id")" --peer-urls="http://${HOSTNAME}.emco-etcd-headless.emco.svc.cluster.local:2380" 1>&3 2>&4
+          fi
+      fi
+      exec etcd 1>&3 2>&4
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco-db-emco
+      meta.helm.sh/release-namespace: emco
+    creationTimestamp: "2022-09-02T09:15:11Z"
+    labels:
+      app.kubernetes.io/instance: emco-db-emco
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: etcd
+      helm.sh/chart: etcd-8.1.99
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:prestop-hook.sh: {}
+          f:probes.sh: {}
+          f:setup.sh: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/instance: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:app.kubernetes.io/name: {}
+            f:helm.sh/chart: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:15:11Z"
+    name: emco-etcd-scripts
+    namespace: emco
+    resourceVersion: "4595899"
+    uid: 0a29e01e-da3a-4f42-83d2-e0b347acd20c
+- apiVersion: v1
+  data:
+    config.json: |-
+      {
+          "database-type": "mongo",
+          "database-ip": "emco-mongo",
+          "etcd-ip": "emco-etcd",
+          "service-port": "9020",
+          "log-level": "warn"
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco
+      meta.helm.sh/release-namespace: emco
+    creationTimestamp: "2022-09-02T09:36:36Z"
+    labels:
+      app: gac
+      app.kubernetes.io/managed-by: Helm
+      chart: gac-1.0.0
+      heritage: Helm
+      release: emco
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:config.json: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:36:36Z"
+    name: emco-gac
+    namespace: emco
+    resourceVersion: "4598020"
+    uid: d6d8b8e2-c085-447e-b9f5-60c7044368d1
+- apiVersion: v1
+  data:
+    config.json: |
+      {
+          "database-type": "mongo",
+          "database-ip": "emco-mongo",
+          "etcd-ip": "emco-etcd",
+          "log-level": "warn"
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco
+      meta.helm.sh/release-namespace: emco
+    creationTimestamp: "2022-09-02T09:36:36Z"
+    labels:
+      app: hpa-ac
+      app.kubernetes.io/managed-by: Helm
+      chart: hpa-ac-1.0.0
+      heritage: Helm
+      release: emco
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:config.json: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:36:36Z"
+    name: emco-hpa-ac
+    namespace: emco
+    resourceVersion: "4598010"
+    uid: f2db9f65-994f-41ef-89c4-91530b097eeb
+- apiVersion: v1
+  data:
+    config.json: |
+      {
+          "database-type": "mongo",
+          "database-ip": "emco-mongo",
+          "etcd-ip": "emco-etcd",
+          "service-port": "9091",
+          "log-level": "warn"
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco
+      meta.helm.sh/release-namespace: emco
+    creationTimestamp: "2022-09-02T09:36:36Z"
+    labels:
+      app: hpa-plc
+      app.kubernetes.io/managed-by: Helm
+      chart: hpa-plc-1.0.0
+      heritage: Helm
+      release: emco
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:config.json: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:36:36Z"
+    name: emco-hpa-plc
+    namespace: emco
+    resourceVersion: "4598012"
+    uid: 1b1b4e7f-62ea-4a5e-bccf-877f35c42758
+- apiVersion: v1
+  data:
+    config.json: |
+      {
+          "database-type": "mongo",
+          "database-ip": "emco-mongo",
+          "etcd-ip": "emco-etcd",
+          "log-level": "warn"
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco
+      meta.helm.sh/release-namespace: emco
+    creationTimestamp: "2022-09-02T09:36:36Z"
+    labels:
+      app: its
+      app.kubernetes.io/managed-by: Helm
+      chart: its-1.0.0
+      heritage: Helm
+      release: emco
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:config.json: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:36:36Z"
+    name: emco-its
+    namespace: emco
+    resourceVersion: "4598023"
+    uid: 7cef602f-c96d-49aa-b567-51201aa82ddd
+- apiVersion: v1
+  data:
+    config.json: |
+      {
+
+          "database-type": "mongo",
+          "database-ip": "emco-mongo",
+          "etcd-ip": "emco-etcd",
+          "service-port": "9081",
+          "log-level": "warn"
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco
+      meta.helm.sh/release-namespace: emco
+    creationTimestamp: "2022-09-02T09:36:36Z"
+    labels:
+      app: ncm
+      app.kubernetes.io/managed-by: Helm
+      chart: ncm-1.0.0
+      heritage: Helm
+      release: emco
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:config.json: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:36:36Z"
+    name: emco-ncm
+    namespace: emco
+    resourceVersion: "4598016"
+    uid: e597ed94-21e6-48f4-b71f-4c9323501196
+- apiVersion: v1
+  data:
+    config.json: |
+      {
+          "database-type": "mongo",
+          "database-ip": "emco-mongo",
+          "etcd-ip": "emco-etcd",
+          "log-level": "warn"
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco
+      meta.helm.sh/release-namespace: emco
+    creationTimestamp: "2022-09-02T09:36:36Z"
+    labels:
+      app: nps
+      app.kubernetes.io/managed-by: Helm
+      chart: nps-1.0.0
+      heritage: Helm
+      release: emco
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:config.json: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:36:36Z"
+    name: emco-nps
+    namespace: emco
+    resourceVersion: "4598007"
+    uid: 02e4815b-e1d1-4f31-bedb-e48ad3216380
+- apiVersion: v1
+  data:
+    config.json: |-
+      {
+          "database-type": "mongo",
+          "database-ip": "emco-mongo.emco",
+          "etcd-ip": "emco-etcd.emco",
+          "service-port": "9015",
+          "log-level": "warn"
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco
+      meta.helm.sh/release-namespace: emco
+    creationTimestamp: "2022-09-02T09:36:36Z"
+    labels:
+      app: orchestrator
+      app.kubernetes.io/managed-by: Helm
+      chart: orchestrator-1.0.0
+      heritage: Helm
+      release: emco
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:36:36Z"
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          f:config.json: {}
+      manager: kubectl-edit
+      operation: Update
+      time: "2022-09-02T09:50:15Z"
+    name: emco-orchestrator
+    namespace: emco
+    resourceVersion: "4599801"
+    uid: 6dc5257d-0012-4de7-9d52-a2c663da5794
+- apiVersion: v1
+  data:
+    config.json: |-
+      {
+          "database-type": "mongo",
+          "database-ip": "emco-mongo",
+          "etcd-ip": "emco-etcd",
+          "service-port": "9051",
+          "log-level": "warn"
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco
+      meta.helm.sh/release-namespace: emco
+    creationTimestamp: "2022-09-02T09:36:36Z"
+    labels:
+      app: ovnaction
+      app.kubernetes.io/managed-by: Helm
+      chart: ovnaction-1.0.0
+      heritage: Helm
+      release: emco
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:config.json: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:36:36Z"
+    name: emco-ovnaction
+    namespace: emco
+    resourceVersion: "4598008"
+    uid: 4430b51b-f87d-4cab-9f42-adc4e419b6ce
+- apiVersion: v1
+  data:
+    config.json: |-
+      {
+          "database-type": "mongo",
+          "database-ip": "emco-mongo",
+          "etcd-ip": "emco-etcd",
+          "log-level": "warn"
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco
+      meta.helm.sh/release-namespace: emco
+    creationTimestamp: "2022-09-02T09:36:36Z"
+    labels:
+      app: rsync
+      app.kubernetes.io/managed-by: Helm
+      chart: rsync-1.0.0
+      heritage: Helm
+      release: emco
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:config.json: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:36:36Z"
+    name: emco-rsync
+    namespace: emco
+    resourceVersion: "4598019"
+    uid: e7c73b4f-20e7-44af-b5d8-cc2aee01901d
+- apiVersion: v1
+  data:
+    config.json: |
+      {
+          "database-type": "mongo",
+          "database-ip": "emco-mongo",
+          "etcd-ip": "emco-etcd",
+          "log-level": "warn"
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco
+      meta.helm.sh/release-namespace: emco
+    creationTimestamp: "2022-09-02T09:36:36Z"
+    labels:
+      app: sds
+      app.kubernetes.io/managed-by: Helm
+      chart: sds-1.0.0
+      heritage: Helm
+      release: emco
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:config.json: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:36:36Z"
+    name: emco-sds
+    namespace: emco
+    resourceVersion: "4598009"
+    uid: ed046d19-53f7-47c0-ad08-21058b535493
+- apiVersion: v1
+  data:
+    config.json: |
+      {
+          "database-type": "mongo",
+          "database-ip": "emco-mongo",
+          "etcd-ip": "emco-etcd",
+          "service-port": "9055",
+          "log-level": "warn"
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco
+      meta.helm.sh/release-namespace: emco
+    creationTimestamp: "2022-09-02T09:36:36Z"
+    labels:
+      app: sfc
+      app.kubernetes.io/managed-by: Helm
+      chart: sfc-1.0.0
+      heritage: Helm
+      release: emco
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:config.json: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:36:36Z"
+    name: emco-sfc
+    namespace: emco
+    resourceVersion: "4598022"
+    uid: 878568cb-b787-4456-9dfb-0d407079632b
+- apiVersion: v1
+  data:
+    config.json: |
+      {
+          "database-type": "mongo",
+          "database-ip": "emco-mongo",
+          "etcd-ip": "emco-etcd",
+          "service-port": "9057",
+          "log-level": "warn"
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco
+      meta.helm.sh/release-namespace: emco
+    creationTimestamp: "2022-09-02T09:36:36Z"
+    labels:
+      app: sfcclient
+      app.kubernetes.io/managed-by: Helm
+      chart: sfcclient-1.0.0
+      heritage: Helm
+      release: emco
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:config.json: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:36:36Z"
+    name: emco-sfcclient
+    namespace: emco
+    resourceVersion: "4598006"
+    uid: d1571dcc-0ca2-4994-a84d-67234b303a4d
+- apiVersion: v1
+  data:
+    config.json: |
+      {
+          "database-type": "mongo",
+          "database-ip": "emco-mongo",
+          "etcd-ip": "emco-etcd",
+          "log-level": "warn"
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco
+      meta.helm.sh/release-namespace: emco
+    creationTimestamp: "2022-09-02T09:36:36Z"
+    labels:
+      app: swc
+      app.kubernetes.io/managed-by: Helm
+      chart: swc-1.0.0
+      heritage: Helm
+      release: emco
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:config.json: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:36:36Z"
+    name: emco-swc
+    namespace: emco
+    resourceVersion: "4598005"
+    uid: eb6fc087-0eb4-4b4e-8dbb-523d813569e3
+- apiVersion: v1
+  data:
+    config.json: |
+      {
+          "database-type": "mongo",
+          "database-ip": "emco-mongo",
+          "etcd-ip": "emco-etcd",
+          "service-port": "9064",
+          "log-level": "warn"
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco
+      meta.helm.sh/release-namespace: emco
+    creationTimestamp: "2022-09-02T09:36:36Z"
+    labels:
+      app: tac
+      app.kubernetes.io/managed-by: Helm
+      chart: tac-1.0.0
+      heritage: Helm
+      release: emco
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:config.json: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:36:36Z"
+    name: emco-tac
+    namespace: emco
+    resourceVersion: "4598013"
+    uid: 59b46ce1-d1b6-4992-98af-27490f994a74
+- apiVersion: v1
+  data:
+    config.json: |
+      {
+          "database-type": "mongo",
+          "database-ip": "emco-mongo",
+          "etcd-ip": "emco-etcd",
+          "service-port": "9095",
+          "log-level": "warn"
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco
+      meta.helm.sh/release-namespace: emco
+    creationTimestamp: "2022-09-02T09:36:36Z"
+    labels:
+      app: workflowmgr
+      app.kubernetes.io/managed-by: Helm
+      chart: workflowmgr-1.0.0
+      heritage: Helm
+      release: emco
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:config.json: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:36:36Z"
+    name: emco-workflowmgr
+    namespace: emco
+    resourceVersion: "4598014"
+    uid: 6f4838aa-0957-48e4-a7b7-9f2199415130
+- apiVersion: v1
+  data:
+    env-config.js: |
+      window._env_ = { ENABLE_RBAC: "true"}
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco-gui
+      meta.helm.sh/release-namespace: emco
+    creationTimestamp: "2022-09-02T09:54:09Z"
+    labels:
+      app.kubernetes.io/managed-by: Helm
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:env-config.js: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/managed-by: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:54:09Z"
+    name: emcoenv-config
+    namespace: emco
+    resourceVersion: "4600164"
+    uid: 6f34e2c6-b3db-429d-aadc-0642f547bfb8
+- apiVersion: v1
+  data:
+    my-nginx-config.conf: "server {\n  listen       9080;\n  server_name  localhost;\n
+      \ rewrite ^/app/(.*) /$1  break;    \n  location / {\n      root   /usr/share/nginx/html;\n
+      \     index  index.html;\n      try_files $uri $uri/ /index.html;\n  }\n  error_page
+      \  500 502 503 504  /50x.html;\n  location = /50x.html {\n      root   /usr/share/nginx/html;\n
+      \ }\n  location /middleend {\n      proxy_pass   http://emco-gui-middleend.emco:9051;\n
+      \ }\n  location /v2/controllers {\n      proxy_pass   http://orchestrator.emco:9015;\n
+      \ }\n  location /v2/dtc-controllers {\n      proxy_pass  http://dtc.emco:9018;\n
+      \ }\n  location /v2/projects {\n      proxy_pass   http://orchestrator.emco:9015;\n
+      \ }\n  location /v2/cluster-providers {\n       proxy_pass   http://clm.emco:9061;\n
+      \ }\n  location /v2/ovnaction {\n      rewrite ^/v2/ovnaction/(.*) /v2/projects/$1
+      \ break;\n      proxy_pass   http://ovnaction.emco:9053;\n  }\n  location /v2/ncm
+      {\n      rewrite ^/v2/ncm/(.*) /v2/cluster-providers/$1  break;\n      proxy_pass
+      \  http://ncm.emco:9081;\n  }\n  location /v2/dcm {\n      rewrite ^/v2/dcm/(.*)
+      /v2/$1  break;\n      proxy_pass  http://dcm.emco:9077;\n  }\n}\n"
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco-gui
+      meta.helm.sh/release-namespace: emco
+    creationTimestamp: "2022-09-02T09:54:09Z"
+    labels:
+      app.kubernetes.io/managed-by: Helm
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:my-nginx-config.conf: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/managed-by: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:54:09Z"
+    name: emcogui-config
+    namespace: emco
+    resourceVersion: "4600165"
+    uid: 95885059-2735-4562-bfee-3ef7366495fb
+- apiVersion: v1
+  data:
+    ca.crt: |
+      -----BEGIN CERTIFICATE-----
+      MIIC5zCCAc+gAwIBAgIBADANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDEwprdWJl
+      cm5ldGVzMB4XDTIyMDcyMDA0NTI1MloXDTMyMDcxNzA0NTI1MlowFTETMBEGA1UE
+      AxMKa3ViZXJuZXRlczCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALSu
+      8tn5qu4OjQr38oa5ZctVFuVdxJNZvxBcDS3NrGL/+lDelyNBisi0L2IL8UEniPIv
+      ELbR0um7Qrj6JslQWKVF8vSDKyMwcCNAn1UcDqZWSYIzlPNWVZjtTm6NdttIb31o
+      f/Oq+xAcNVeVmbqZ5YOORuqLV0YeS1+EWZFxAeNYd0Jk3EVX6co1cvmZwzNJWQst
+      8dYyQEYORbzL7B2hBY8OWpjxuG/cgd2pqAVulYNc7eHUxmryCKII8wtccJEmqvZu
+      rOF2ahkE22dGOtDoxJOMpJEBri8soUzmM5WHRj+2cyvV4gAhgHhkFS8I5rumefNK
+      q77CaiFJFXMXoMTqzbsCAwEAAaNCMEAwDgYDVR0PAQH/BAQDAgKkMA8GA1UdEwEB
+      /wQFMAMBAf8wHQYDVR0OBBYEFKcVvp4/r5k422vc+b/mRAMiZHh4MA0GCSqGSIb3
+      DQEBCwUAA4IBAQC0f43tA+ALko7sSH4mWY3F5nr2KSoto472J9nGJNCB1ad/ccOC
+      0Dq6Z5NOWNjaQnYBSjKAUfYtmvH24TasXMqhrvxVzTnMdTnov3l116Rxy6nW1r5/
+      D+LxhUCDxY9GV5TSZk2d9BlVDR5UyLgO4uzLqwTZHQJuvCfu5RDF4cZIrLoeoL2q
+      6Z7T5raytFgpmE3Q8LVRuZ1gKgFtpaXV8H9BhS3NgqePysgzMrcXxh/b7mS7hOBh
+      7m76aNfYZFtPe94e5c1lq2mE0yxk1iUJV9hGbhZwd5HAFw+WLkap95u1TMzuDff0
+      hksv+9ZrCMkychbXSiOCGuwR+1MMJUPFvTlf
+      -----END CERTIFICATE-----
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: "2022-07-21T09:15:32Z"
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:ca.crt: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: "2022-07-21T09:15:32Z"
+    name: kube-root-ca.crt
+    namespace: emco
+    resourceVersion: "123126"
+    uid: 351c6425-1aae-4125-b695-aac230f323e9
+- apiVersion: v1
+  data:
+    middleend.conf: |-
+      {
+        "ownport": "9051",
+        "orchestrator": "orchestrator.emco:9015",
+        "clm": "clm.emco:9061",
+        "dcm": "dcm.emco:9077",
+        "ncm": "ncm.emco:9081",
+        "gac": "gac.emco:9020",
+        "dtc": "dtc.emco:9018",
+        "its": "its.emco:9040",
+        "ovnaction": "ovnaction.emco:9051",
+        "configSvc": "configsvc.emco:9082",
+        "mongo": "emco-mongo.emco:27017",
+        "logLevel": "debug",
+        "appInstantiate": "true"
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco-gui
+      meta.helm.sh/release-namespace: emco
+    creationTimestamp: "2022-09-02T09:54:09Z"
+    labels:
+      app.kubernetes.io/managed-by: Helm
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/managed-by: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:54:09Z"
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          f:middleend.conf: {}
+      manager: kubectl-edit
+      operation: Update
+      time: "2022-09-02T09:56:42Z"
+    name: middleend-config
+    namespace: emco
+    resourceVersion: "4600466"
+    uid: c4ef421b-5bee-4490-9d87-5d26b815b816
+- apiVersion: v1
+  data:
+    api_proxy_target: http://emco-gui.emcoui:9080
+    mongodb_host: emco-mongo.emco:27017
+    node_env: production
+    ui_proxy_target: http://emco-gui.emcoui:9080
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emcoui
+      meta.helm.sh/release-namespace: emcoui
+    creationTimestamp: "2022-09-02T09:27:03Z"
+    labels:
+      app.kubernetes.io/managed-by: Helm
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:api_proxy_target: {}
+          f:mongodb_host: {}
+          f:node_env: {}
+          f:ui_proxy_target: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/managed-by: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:27:03Z"
+    name: authgw-configmap
+    namespace: emcoui
+    resourceVersion: "4597113"
+    uid: 2ab30d37-97f7-4996-b574-474eaac64b8d
+- apiVersion: v1
+  data:
+    config.json: |-
+      {
+          "database-type": "mongo",
+          "database-ip": "emco-mongo",
+          "etcd-ip": "emco-etcd",
+          "service-port": "9036",
+          "log-level": "warn"
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco
+      meta.helm.sh/release-namespace: emcoui
+    creationTimestamp: "2022-09-02T09:03:51Z"
+    labels:
+      app: ca-certs
+      app.kubernetes.io/managed-by: Helm
+      chart: ca-certs-1.0.0
+      heritage: Helm
+      release: emco
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:config.json: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:03:51Z"
+    name: emco-ca-certs
+    namespace: emcoui
+    resourceVersion: "4594461"
+    uid: 9b8e1282-3353-48bd-9ff8-6c61e7813883
+- apiVersion: v1
+  data:
+    config.json: |-
+      {
+          "database-type": "mongo",
+          "database-ip": "emco-mongo",
+          "etcd-ip": "emco-etcd",
+          "service-port": "9061",
+          "log-level": "warn"
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco
+      meta.helm.sh/release-namespace: emcoui
+    creationTimestamp: "2022-09-02T09:03:51Z"
+    labels:
+      app: clm
+      app.kubernetes.io/managed-by: Helm
+      chart: clm-1.0.0
+      heritage: Helm
+      release: emco
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:config.json: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:03:51Z"
+    name: emco-clm
+    namespace: emcoui
+    resourceVersion: "4594457"
+    uid: b4031e8b-fd63-4f28-a899-278fcfc4d00b
+- apiVersion: v1
+  data:
+    config.json: |
+      {
+
+          "database-type": "mongo",
+          "database-ip": "emco-mongo",
+          "etcd-ip": "emco-etcd",
+          "service-port": "9077",
+          "log-level": "warn"
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco
+      meta.helm.sh/release-namespace: emcoui
+    creationTimestamp: "2022-09-02T09:03:51Z"
+    labels:
+      app: dcm
+      app.kubernetes.io/managed-by: Helm
+      chart: dcm-1.0.0
+      heritage: Helm
+      release: emco
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:config.json: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:03:51Z"
+    name: emco-dcm
+    namespace: emcoui
+    resourceVersion: "4594452"
+    uid: ed712831-cd72-43a1-b08f-27a954e59e23
+- apiVersion: v1
+  data:
+    config.json: |-
+      {
+          "database-type": "mongo",
+          "database-ip": "emco-mongo",
+          "etcd-ip": "emco-etcd",
+          "service-port": "9018",
+          "log-level": "warn"
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco
+      meta.helm.sh/release-namespace: emcoui
+    creationTimestamp: "2022-09-02T09:03:51Z"
+    labels:
+      app: dtc
+      app.kubernetes.io/managed-by: Helm
+      chart: dtc-1.0.0
+      heritage: Helm
+      release: emco
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:config.json: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:03:51Z"
+    name: emco-dtc
+    namespace: emcoui
+    resourceVersion: "4594456"
+    uid: 3491c5c3-afdd-406c-8805-e54d05567f67
+- apiVersion: v1
+  data:
+    prestop-hook.sh: |-
+      #!/bin/bash
+
+      set -o errexit
+      set -o pipefail
+      set -o nounset
+
+      # Debug section
+      exec 3>&1
+      exec 4>&2
+
+      if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
+        echo "==> Bash debug is on"
+      else
+        echo "==> Bash debug is off"
+        exec 1>/dev/null
+        exec 2>/dev/null
+      fi
+
+      # Constants
+      AUTH_OPTIONS=""
+      export ETCDCTL_ENDPOINTS="emco-etcd-0.emco-etcd-headless.emcoui.svc.cluster.local:2379"
+
+      etcdctl $AUTH_OPTIONS member remove --debug=true "$(cat "$ETCD_DATA_DIR/member_id")" > "$(dirname "$ETCD_DATA_DIR")/member_removal.log" 2>&1
+    probes.sh: |-
+      #!/bin/bash
+
+      set -o errexit
+      set -o pipefail
+      set -o nounset
+
+      # Debug section
+      exec 3>&1
+      exec 4>&2
+
+      if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
+          echo "==> Bash debug is on"
+      else
+          echo "==> Bash debug is off"
+          exec 1>/dev/null
+          exec 2>/dev/null
+      fi
+
+      # Constants
+      AUTH_OPTIONS=""
+
+      echo "==> [DEBUG] Probing etcd cluster"
+      echo "==> [DEBUG] Probe command: \"etcdctl $AUTH_OPTIONS endpoint health\""
+      etcdctl $AUTH_OPTIONS endpoint health
+    setup.sh: |-
+      #!/bin/bash
+
+      set -o errexit
+      set -o pipefail
+      set -o nounset
+
+      # Debug section
+      exec 3>&1
+      exec 4>&2
+
+      if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
+          echo "==> Bash debug is on"
+      else
+          echo "==> Bash debug is off"
+          exec 1>/dev/null
+          exec 2>/dev/null
+      fi
+
+      # Constants
+      HOSTNAME="$(hostname -s)"
+      AUTH_OPTIONS=""
+      export ETCDCTL_ENDPOINTS="emco-etcd-0.emco-etcd-headless.emcoui.svc.cluster.local:2379"
+      export ROOT_PASSWORD="${ETCD_ROOT_PASSWORD:-}"
+      if [[ -n "${ETCD_ROOT_PASSWORD:-}" ]]; then
+        unset ETCD_ROOT_PASSWORD
+      fi
+      # Functions
+      ## Store member id for later member replacement
+      store_member_id() {
+          while ! etcdctl $AUTH_OPTIONS member list; do sleep 1; done
+          etcdctl $AUTH_OPTIONS member list | grep -w "$HOSTNAME" | awk '{ print $1}' | awk -F "," '{ print $1}' > "$ETCD_DATA_DIR/member_id"
+          echo "==> Stored member id: $(cat ${ETCD_DATA_DIR}/member_id)" 1>&3 2>&4
+          exit 0
+      }
+      ## Configure RBAC
+      configure_rbac() {
+          # When there's more than one replica, we can assume the 1st member
+          # to be created is "emco-etcd-0" since a statefulset is used
+          if [[ -n "${ROOT_PASSWORD:-}" ]] && [[ "$HOSTNAME" == "emco-etcd-0" ]]; then
+              echo "==> Configuring RBAC authentication!" 1>&3 2>&4
+              etcd &
+              ETCD_PID=$!
+              while ! etcdctl $AUTH_OPTIONS member list; do sleep 1; done
+              echo "$ROOT_PASSWORD" | etcdctl $AUTH_OPTIONS user add root --interactive=false
+              etcdctl $AUTH_OPTIONS auth enable
+              kill "$ETCD_PID"
+              sleep 5
+          fi
+      }
+      ## Checks whether there was a disaster or not
+      is_disastrous_failure() {
+          local endpoints_array=(${ETCDCTL_ENDPOINTS//,/ })
+          local active_endpoints=0
+          local -r min_endpoints=$(((1 + 1)/2))
+
+          for e in "${endpoints_array[@]}"; do
+              if [[ "$e" != "$ETCD_ADVERTISE_CLIENT_URLS" ]] && (unset -v ETCDCTL_ENDPOINTS; etcdctl $AUTH_OPTIONS  endpoint health --endpoints="$e"); then
+                  active_endpoints=$((active_endpoints + 1))
+              fi
+          done
+          if [[ $active_endpoints -lt $min_endpoints ]]; then
+              true
+          else
+              false
+          fi
+      }
+
+      ## Check whether the member was successfully removed from the cluster
+      should_add_new_member() {
+          return_value=0
+          if (grep -E "^Member[[:space:]]+[a-z0-9]+\s+removed\s+from\s+cluster\s+[a-z0-9]+$" "$(dirname "$ETCD_DATA_DIR")/member_removal.log") || \
+             ! ([[ -d "$ETCD_DATA_DIR/member/snap" ]] && [[ -f "$ETCD_DATA_DIR/member_id" ]]); then
+              rm -rf $ETCD_DATA_DIR/* 1>&3 2>&4
+          else
+              return_value=1
+          fi
+          rm -f "$(dirname "$ETCD_DATA_DIR")/member_removal.log" 1>&3 2>&4
+          return $return_value
+      }
+
+      if [[ ! -d "$ETCD_DATA_DIR" ]]; then
+          echo "==> Creating data dir..." 1>&3 2>&4
+          echo "==> There is no data at all. Initializing a new member of the cluster..." 1>&3 2>&4
+          store_member_id & 1>&3 2>&4
+          configure_rbac
+      else
+          echo "==> Detected data from previous deployments..." 1>&3 2>&4
+          if [[ $(stat -c "%a" "$ETCD_DATA_DIR") != *700 ]]; then
+              echo "==> Setting data directory permissions to 700 in a recursive way (required in etcd >=3.4.10)" 1>&3 2>&4
+              chmod -R 700 $ETCD_DATA_DIR
+          else
+              echo "==> The data directory is already configured with the proper permissions" 1>&3 2>&4
+          fi
+          if [[ 1 -eq 1 ]]; then
+              echo "==> Single node cluster detected!!" 1>&3 2>&4
+          elif is_disastrous_failure; then
+              echo "==> Cluster not responding!!" 1>&3 2>&4
+              echo "==> Disaster recovery is disabled, the cluster will try to recover on it's own..." 1>&3 2>&4
+          elif should_add_new_member; then
+              echo "==> Adding new member to existing cluster..." 1>&3 2>&4
+              etcdctl $AUTH_OPTIONS member add "$HOSTNAME" --peer-urls="http://${HOSTNAME}.emco-etcd-headless.emcoui.svc.cluster.local:2380" | grep "^ETCD_" > "$ETCD_DATA_DIR/new_member_envs"
+              sed -ie "s/^/export /" "$ETCD_DATA_DIR/new_member_envs"
+              echo "==> Loading env vars of existing cluster..." 1>&3 2>&4
+              source "$ETCD_DATA_DIR/new_member_envs" 1>&3 2>&4
+              store_member_id & 1>&3 2>&4
+          else
+              echo "==> Updating member in existing cluster..." 1>&3 2>&4
+              etcdctl $AUTH_OPTIONS member update "$(cat "$ETCD_DATA_DIR/member_id")" --peer-urls="http://${HOSTNAME}.emco-etcd-headless.emcoui.svc.cluster.local:2380" 1>&3 2>&4
+          fi
+      fi
+      exec etcd 1>&3 2>&4
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco-db
+      meta.helm.sh/release-namespace: emcoui
+    creationTimestamp: "2022-09-02T08:47:54Z"
+    labels:
+      app.kubernetes.io/instance: emco-db
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: etcd
+      helm.sh/chart: etcd-8.1.99
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:prestop-hook.sh: {}
+          f:probes.sh: {}
+          f:setup.sh: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/instance: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:app.kubernetes.io/name: {}
+            f:helm.sh/chart: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T08:47:54Z"
+    name: emco-etcd-scripts
+    namespace: emcoui
+    resourceVersion: "4593185"
+    uid: 6efe3dc6-c62c-499d-b638-8c6c17dd9ac6
+- apiVersion: v1
+  data:
+    config.json: |-
+      {
+          "database-type": "mongo",
+          "database-ip": "emco-mongo",
+          "etcd-ip": "emco-etcd",
+          "service-port": "9020",
+          "log-level": "warn"
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco
+      meta.helm.sh/release-namespace: emcoui
+    creationTimestamp: "2022-09-02T09:03:51Z"
+    labels:
+      app: gac
+      app.kubernetes.io/managed-by: Helm
+      chart: gac-1.0.0
+      heritage: Helm
+      release: emco
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:config.json: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:03:51Z"
+    name: emco-gac
+    namespace: emcoui
+    resourceVersion: "4594445"
+    uid: 056e2c12-cdc0-4397-8b27-5b61c4059d49
+- apiVersion: v1
+  data:
+    config.json: |
+      {
+          "database-type": "mongo",
+          "database-ip": "emco-mongo",
+          "etcd-ip": "emco-etcd",
+          "log-level": "warn"
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco
+      meta.helm.sh/release-namespace: emcoui
+    creationTimestamp: "2022-09-02T09:03:51Z"
+    labels:
+      app: hpa-ac
+      app.kubernetes.io/managed-by: Helm
+      chart: hpa-ac-1.0.0
+      heritage: Helm
+      release: emco
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:config.json: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:03:51Z"
+    name: emco-hpa-ac
+    namespace: emcoui
+    resourceVersion: "4594460"
+    uid: 95179474-876e-426b-9cb2-98e3574ce2ef
+- apiVersion: v1
+  data:
+    config.json: |
+      {
+          "database-type": "mongo",
+          "database-ip": "emco-mongo",
+          "etcd-ip": "emco-etcd",
+          "service-port": "9091",
+          "log-level": "warn"
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco
+      meta.helm.sh/release-namespace: emcoui
+    creationTimestamp: "2022-09-02T09:03:51Z"
+    labels:
+      app: hpa-plc
+      app.kubernetes.io/managed-by: Helm
+      chart: hpa-plc-1.0.0
+      heritage: Helm
+      release: emco
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:config.json: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:03:51Z"
+    name: emco-hpa-plc
+    namespace: emcoui
+    resourceVersion: "4594458"
+    uid: bf8b2eab-09a9-40d3-9f19-e87b76a81098
+- apiVersion: v1
+  data:
+    config.json: |
+      {
+          "database-type": "mongo",
+          "database-ip": "emco-mongo",
+          "etcd-ip": "emco-etcd",
+          "log-level": "warn"
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco
+      meta.helm.sh/release-namespace: emcoui
+    creationTimestamp: "2022-09-02T09:03:51Z"
+    labels:
+      app: its
+      app.kubernetes.io/managed-by: Helm
+      chart: its-1.0.0
+      heritage: Helm
+      release: emco
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:config.json: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:03:51Z"
+    name: emco-its
+    namespace: emcoui
+    resourceVersion: "4594454"
+    uid: 278c794e-dd3c-46d5-82fc-0b732247015c
+- apiVersion: v1
+  data:
+    config.json: |
+      {
+
+          "database-type": "mongo",
+          "database-ip": "emco-mongo",
+          "etcd-ip": "emco-etcd",
+          "service-port": "9081",
+          "log-level": "warn"
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco
+      meta.helm.sh/release-namespace: emcoui
+    creationTimestamp: "2022-09-02T09:03:51Z"
+    labels:
+      app: ncm
+      app.kubernetes.io/managed-by: Helm
+      chart: ncm-1.0.0
+      heritage: Helm
+      release: emco
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:config.json: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:03:51Z"
+    name: emco-ncm
+    namespace: emcoui
+    resourceVersion: "4594455"
+    uid: 26ace358-b9e6-424b-9629-51e7b2f992f4
+- apiVersion: v1
+  data:
+    config.json: |
+      {
+          "database-type": "mongo",
+          "database-ip": "emco-mongo",
+          "etcd-ip": "emco-etcd",
+          "log-level": "warn"
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco
+      meta.helm.sh/release-namespace: emcoui
+    creationTimestamp: "2022-09-02T09:03:51Z"
+    labels:
+      app: nps
+      app.kubernetes.io/managed-by: Helm
+      chart: nps-1.0.0
+      heritage: Helm
+      release: emco
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:config.json: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:03:51Z"
+    name: emco-nps
+    namespace: emcoui
+    resourceVersion: "4594443"
+    uid: 8c44856a-15c4-4c8d-b6d9-ec46519b234f
+- apiVersion: v1
+  data:
+    config.json: |-
+      {
+          "database-type": "mongo",
+          "database-ip": "emco-mongo",
+          "etcd-ip": "emco-etcd",
+          "service-port": "9015",
+          "log-level": "warn"
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco
+      meta.helm.sh/release-namespace: emcoui
+    creationTimestamp: "2022-09-02T09:03:51Z"
+    labels:
+      app: orchestrator
+      app.kubernetes.io/managed-by: Helm
+      chart: orchestrator-1.0.0
+      heritage: Helm
+      release: emco
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:config.json: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:03:51Z"
+    name: emco-orchestrator
+    namespace: emcoui
+    resourceVersion: "4594446"
+    uid: c0cca1c8-ec60-4e0a-935f-2d63c940a0cf
+- apiVersion: v1
+  data:
+    config.json: |-
+      {
+          "database-type": "mongo",
+          "database-ip": "emco-mongo",
+          "etcd-ip": "emco-etcd",
+          "service-port": "9051",
+          "log-level": "warn"
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco
+      meta.helm.sh/release-namespace: emcoui
+    creationTimestamp: "2022-09-02T09:03:51Z"
+    labels:
+      app: ovnaction
+      app.kubernetes.io/managed-by: Helm
+      chart: ovnaction-1.0.0
+      heritage: Helm
+      release: emco
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:config.json: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:03:51Z"
+    name: emco-ovnaction
+    namespace: emcoui
+    resourceVersion: "4594449"
+    uid: f0b7dced-4ad8-4ffd-9243-47b7fe141029
+- apiVersion: v1
+  data:
+    config.json: |-
+      {
+          "database-type": "mongo",
+          "database-ip": "emco-mongo",
+          "etcd-ip": "emco-etcd",
+          "log-level": "warn"
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco
+      meta.helm.sh/release-namespace: emcoui
+    creationTimestamp: "2022-09-02T09:03:51Z"
+    labels:
+      app: rsync
+      app.kubernetes.io/managed-by: Helm
+      chart: rsync-1.0.0
+      heritage: Helm
+      release: emco
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:config.json: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:03:51Z"
+    name: emco-rsync
+    namespace: emcoui
+    resourceVersion: "4594451"
+    uid: ca5139f5-e712-4d4b-923a-c283fecc6a24
+- apiVersion: v1
+  data:
+    config.json: |
+      {
+          "database-type": "mongo",
+          "database-ip": "emco-mongo",
+          "etcd-ip": "emco-etcd",
+          "log-level": "warn"
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco
+      meta.helm.sh/release-namespace: emcoui
+    creationTimestamp: "2022-09-02T09:03:51Z"
+    labels:
+      app: sds
+      app.kubernetes.io/managed-by: Helm
+      chart: sds-1.0.0
+      heritage: Helm
+      release: emco
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:config.json: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:03:51Z"
+    name: emco-sds
+    namespace: emcoui
+    resourceVersion: "4594459"
+    uid: f0360fa1-4862-4119-84e2-43d4a7fe78c7
+- apiVersion: v1
+  data:
+    config.json: |
+      {
+          "database-type": "mongo",
+          "database-ip": "emco-mongo",
+          "etcd-ip": "emco-etcd",
+          "service-port": "9055",
+          "log-level": "warn"
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco
+      meta.helm.sh/release-namespace: emcoui
+    creationTimestamp: "2022-09-02T09:03:51Z"
+    labels:
+      app: sfc
+      app.kubernetes.io/managed-by: Helm
+      chart: sfc-1.0.0
+      heritage: Helm
+      release: emco
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:config.json: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:03:51Z"
+    name: emco-sfc
+    namespace: emcoui
+    resourceVersion: "4594447"
+    uid: 425f1e61-951f-45e9-a189-08b38f8609d4
+- apiVersion: v1
+  data:
+    config.json: |
+      {
+          "database-type": "mongo",
+          "database-ip": "emco-mongo",
+          "etcd-ip": "emco-etcd",
+          "service-port": "9057",
+          "log-level": "warn"
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco
+      meta.helm.sh/release-namespace: emcoui
+    creationTimestamp: "2022-09-02T09:03:51Z"
+    labels:
+      app: sfcclient
+      app.kubernetes.io/managed-by: Helm
+      chart: sfcclient-1.0.0
+      heritage: Helm
+      release: emco
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:config.json: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:03:51Z"
+    name: emco-sfcclient
+    namespace: emcoui
+    resourceVersion: "4594448"
+    uid: 99871a16-a7c9-4b7d-b5ad-9a3877db30b1
+- apiVersion: v1
+  data:
+    config.json: |
+      {
+          "database-type": "mongo",
+          "database-ip": "emco-mongo",
+          "etcd-ip": "emco-etcd",
+          "log-level": "warn"
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco
+      meta.helm.sh/release-namespace: emcoui
+    creationTimestamp: "2022-09-02T09:03:51Z"
+    labels:
+      app: swc
+      app.kubernetes.io/managed-by: Helm
+      chart: swc-1.0.0
+      heritage: Helm
+      release: emco
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:config.json: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:03:51Z"
+    name: emco-swc
+    namespace: emcoui
+    resourceVersion: "4594450"
+    uid: 9272f1ed-e285-490c-9f8b-7a09fec60ab3
+- apiVersion: v1
+  data:
+    config.json: |
+      {
+          "database-type": "mongo",
+          "database-ip": "emco-mongo",
+          "etcd-ip": "emco-etcd",
+          "service-port": "9064",
+          "log-level": "warn"
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco
+      meta.helm.sh/release-namespace: emcoui
+    creationTimestamp: "2022-09-02T09:03:51Z"
+    labels:
+      app: tac
+      app.kubernetes.io/managed-by: Helm
+      chart: tac-1.0.0
+      heritage: Helm
+      release: emco
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:config.json: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:03:51Z"
+    name: emco-tac
+    namespace: emcoui
+    resourceVersion: "4594453"
+    uid: 018f58f7-ab90-4a9f-8fea-cbec2991bab6
+- apiVersion: v1
+  data:
+    config.json: |
+      {
+          "database-type": "mongo",
+          "database-ip": "emco-mongo",
+          "etcd-ip": "emco-etcd",
+          "service-port": "9095",
+          "log-level": "warn"
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emco
+      meta.helm.sh/release-namespace: emcoui
+    creationTimestamp: "2022-09-02T09:03:51Z"
+    labels:
+      app: workflowmgr
+      app.kubernetes.io/managed-by: Helm
+      chart: workflowmgr-1.0.0
+      heritage: Helm
+      release: emco
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:config.json: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:03:51Z"
+    name: emco-workflowmgr
+    namespace: emcoui
+    resourceVersion: "4594444"
+    uid: 3ee019a5-9492-4371-b1a3-fe60bf7fd967
+- apiVersion: v1
+  data:
+    env-config.js: |
+      window._env_ = { ENABLE_RBAC: "true"}
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emcoui
+      meta.helm.sh/release-namespace: emcoui
+    creationTimestamp: "2022-09-02T09:27:03Z"
+    labels:
+      app.kubernetes.io/managed-by: Helm
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:env-config.js: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/managed-by: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:27:03Z"
+    name: emcoenv-config
+    namespace: emcoui
+    resourceVersion: "4597115"
+    uid: c7abf5bd-519c-4fa7-8db3-6a32831c60e0
+- apiVersion: v1
+  data:
+    my-nginx-config.conf: "server {\n  listen       9080;\n  server_name  localhost;\n
+      \ rewrite ^/app/(.*) /$1  break;    \n  location / {\n      root   /usr/share/nginx/html;\n
+      \     index  index.html;\n      try_files $uri $uri/ /index.html;\n  }\n  error_page
+      \  500 502 503 504  /50x.html;\n  location = /50x.html {\n      root   /usr/share/nginx/html;\n
+      \ }\n  location /middleend {\n      proxy_pass   http://emco-gui-middleend.emcoui:9051;\n
+      \ }\n  location /v2/controllers {\n      proxy_pass   http://orchestrator.emcoui:9015;\n
+      \ }\n  location /v2/dtc-controllers {\n      proxy_pass  http://dtc.emcoui:9018;\n
+      \ }\n  location /v2/projects {\n      proxy_pass   http://orchestrator.emcoui:9015;\n
+      \ }\n  location /v2/cluster-providers {\n       proxy_pass   http://clm.emcoui:9061;\n
+      \ }\n  location /v2/ovnaction {\n      rewrite ^/v2/ovnaction/(.*) /v2/projects/$1
+      \ break;\n      proxy_pass   http://ovnaction.emcoui:9053;\n  }\n  location
+      /v2/ncm {\n      rewrite ^/v2/ncm/(.*) /v2/cluster-providers/$1  break;\n      proxy_pass
+      \  http://ncm.emcoui:9081;\n  }\n  location /v2/dcm {\n      rewrite ^/v2/dcm/(.*)
+      /v2/$1  break;\n      proxy_pass  http://dcm.emcoui:9077;\n  }\n}\n"
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emcoui
+      meta.helm.sh/release-namespace: emcoui
+    creationTimestamp: "2022-09-02T09:27:03Z"
+    labels:
+      app.kubernetes.io/managed-by: Helm
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:my-nginx-config.conf: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/managed-by: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:27:03Z"
+    name: emcogui-config
+    namespace: emcoui
+    resourceVersion: "4597114"
+    uid: 32c44af7-cff0-4406-9daa-727628a9bd8f
+- apiVersion: v1
+  data:
+    ca.crt: |
+      -----BEGIN CERTIFICATE-----
+      MIIC5zCCAc+gAwIBAgIBADANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDEwprdWJl
+      cm5ldGVzMB4XDTIyMDcyMDA0NTI1MloXDTMyMDcxNzA0NTI1MlowFTETMBEGA1UE
+      AxMKa3ViZXJuZXRlczCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALSu
+      8tn5qu4OjQr38oa5ZctVFuVdxJNZvxBcDS3NrGL/+lDelyNBisi0L2IL8UEniPIv
+      ELbR0um7Qrj6JslQWKVF8vSDKyMwcCNAn1UcDqZWSYIzlPNWVZjtTm6NdttIb31o
+      f/Oq+xAcNVeVmbqZ5YOORuqLV0YeS1+EWZFxAeNYd0Jk3EVX6co1cvmZwzNJWQst
+      8dYyQEYORbzL7B2hBY8OWpjxuG/cgd2pqAVulYNc7eHUxmryCKII8wtccJEmqvZu
+      rOF2ahkE22dGOtDoxJOMpJEBri8soUzmM5WHRj+2cyvV4gAhgHhkFS8I5rumefNK
+      q77CaiFJFXMXoMTqzbsCAwEAAaNCMEAwDgYDVR0PAQH/BAQDAgKkMA8GA1UdEwEB
+      /wQFMAMBAf8wHQYDVR0OBBYEFKcVvp4/r5k422vc+b/mRAMiZHh4MA0GCSqGSIb3
+      DQEBCwUAA4IBAQC0f43tA+ALko7sSH4mWY3F5nr2KSoto472J9nGJNCB1ad/ccOC
+      0Dq6Z5NOWNjaQnYBSjKAUfYtmvH24TasXMqhrvxVzTnMdTnov3l116Rxy6nW1r5/
+      D+LxhUCDxY9GV5TSZk2d9BlVDR5UyLgO4uzLqwTZHQJuvCfu5RDF4cZIrLoeoL2q
+      6Z7T5raytFgpmE3Q8LVRuZ1gKgFtpaXV8H9BhS3NgqePysgzMrcXxh/b7mS7hOBh
+      7m76aNfYZFtPe94e5c1lq2mE0yxk1iUJV9hGbhZwd5HAFw+WLkap95u1TMzuDff0
+      hksv+9ZrCMkychbXSiOCGuwR+1MMJUPFvTlf
+      -----END CERTIFICATE-----
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: "2022-08-23T09:43:36Z"
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:ca.crt: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: "2022-08-23T09:43:36Z"
+    name: kube-root-ca.crt
+    namespace: emcoui
+    resourceVersion: "3547234"
+    uid: 04301d31-dd3e-490e-86ba-a1b905712d64
+- apiVersion: v1
+  data:
+    middleend.conf: |-
+      {
+        "ownport": "9051",
+        "orchestrator": "orchestrator.emcoui:9015",
+        "clm": "clm.emcoui:9061",
+        "dcm": "dcm.emcoui:9077",
+        "ncm": "ncm.emcoui:9081",
+        "gac": "gac.emcoui:9020",
+        "dtc": "dtc.emcoui:9018",
+        "its": "its.emcoui:9040",
+        "ovnaction": "ovnaction.emcoui:9051",
+        "configSvc": "configsvc.emcoui:9082",
+        "mongo": "emco-mongo.emcoui:27017",
+        "logLevel": "debug",
+        "appInstantiate": "false"
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: emcoui
+      meta.helm.sh/release-namespace: emcoui
+    creationTimestamp: "2022-09-02T09:27:03Z"
+    labels:
+      app.kubernetes.io/managed-by: Helm
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:middleend.conf: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/managed-by: {}
+      manager: helm
+      operation: Update
+      time: "2022-09-02T09:27:03Z"
+    name: middleend-config
+    namespace: emcoui
+    resourceVersion: "4597116"
+    uid: 7cc47280-11b9-4fda-bd32-3cde969a4a10
+- apiVersion: v1
+  data:
+    ca.crt: |
+      -----BEGIN CERTIFICATE-----
+      MIIC5zCCAc+gAwIBAgIBADANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDEwprdWJl
+      cm5ldGVzMB4XDTIyMDcyMDA0NTI1MloXDTMyMDcxNzA0NTI1MlowFTETMBEGA1UE
+      AxMKa3ViZXJuZXRlczCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALSu
+      8tn5qu4OjQr38oa5ZctVFuVdxJNZvxBcDS3NrGL/+lDelyNBisi0L2IL8UEniPIv
+      ELbR0um7Qrj6JslQWKVF8vSDKyMwcCNAn1UcDqZWSYIzlPNWVZjtTm6NdttIb31o
+      f/Oq+xAcNVeVmbqZ5YOORuqLV0YeS1+EWZFxAeNYd0Jk3EVX6co1cvmZwzNJWQst
+      8dYyQEYORbzL7B2hBY8OWpjxuG/cgd2pqAVulYNc7eHUxmryCKII8wtccJEmqvZu
+      rOF2ahkE22dGOtDoxJOMpJEBri8soUzmM5WHRj+2cyvV4gAhgHhkFS8I5rumefNK
+      q77CaiFJFXMXoMTqzbsCAwEAAaNCMEAwDgYDVR0PAQH/BAQDAgKkMA8GA1UdEwEB
+      /wQFMAMBAf8wHQYDVR0OBBYEFKcVvp4/r5k422vc+b/mRAMiZHh4MA0GCSqGSIb3
+      DQEBCwUAA4IBAQC0f43tA+ALko7sSH4mWY3F5nr2KSoto472J9nGJNCB1ad/ccOC
+      0Dq6Z5NOWNjaQnYBSjKAUfYtmvH24TasXMqhrvxVzTnMdTnov3l116Rxy6nW1r5/
+      D+LxhUCDxY9GV5TSZk2d9BlVDR5UyLgO4uzLqwTZHQJuvCfu5RDF4cZIrLoeoL2q
+      6Z7T5raytFgpmE3Q8LVRuZ1gKgFtpaXV8H9BhS3NgqePysgzMrcXxh/b7mS7hOBh
+      7m76aNfYZFtPe94e5c1lq2mE0yxk1iUJV9hGbhZwd5HAFw+WLkap95u1TMzuDff0
+      hksv+9ZrCMkychbXSiOCGuwR+1MMJUPFvTlf
+      -----END CERTIFICATE-----
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: "2022-07-20T04:53:16Z"
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:ca.crt: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: "2022-07-20T04:53:16Z"
+    name: kube-root-ca.crt
+    namespace: kube-node-lease
+    resourceVersion: "362"
+    uid: e7b908f8-dbe5-45d9-a619-246cf5a1716f
+- apiVersion: v1
+  data:
+    kubeconfig: |
+      apiVersion: v1
+      clusters:
+      - cluster:
+          certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUM1ekNDQWMrZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJeU1EY3lNREEwTlRJMU1sb1hEVE15TURjeE56QTBOVEkxTWxvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTFN1Cjh0bjVxdTRPalFyMzhvYTVaY3RWRnVWZHhKTlp2eEJjRFMzTnJHTC8rbERlbHlOQmlzaTBMMklMOFVFbmlQSXYKRUxiUjB1bTdRcmo2SnNsUVdLVkY4dlNES3lNd2NDTkFuMVVjRHFaV1NZSXpsUE5XVlpqdFRtNk5kdHRJYjMxbwpmL09xK3hBY05WZVZtYnFaNVlPT1J1cUxWMFllUzErRVdaRnhBZU5ZZDBKazNFVlg2Y28xY3ZtWnd6TkpXUXN0CjhkWXlRRVlPUmJ6TDdCMmhCWThPV3BqeHVHL2NnZDJwcUFWdWxZTmM3ZUhVeG1yeUNLSUk4d3RjY0pFbXF2WnUKck9GMmFoa0UyMmRHT3REb3hKT01wSkVCcmk4c29Vem1NNVdIUmorMmN5dlY0Z0FoZ0hoa0ZTOEk1cnVtZWZOSwpxNzdDYWlGSkZYTVhvTVRxemJzQ0F3RUFBYU5DTUVBd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZLY1Z2cDQvcjVrNDIydmMrYi9tUkFNaVpIaDRNQTBHQ1NxR1NJYjMKRFFFQkN3VUFBNElCQVFDMGY0M3RBK0FMa283c1NING1XWTNGNW5yMktTb3RvNDcySjluR0pOQ0IxYWQvY2NPQwowRHE2WjVOT1dOamFRbllCU2pLQVVmWXRtdkgyNFRhc1hNcWhydnhWelRuTWRUbm92M2wxMTZSeHk2blcxcjUvCkQrTHhoVUNEeFk5R1Y1VFNaazJkOUJsVkRSNVV5TGdPNHV6THF3VFpIUUp1dkNmdTVSREY0Y1pJckxvZW9MMnEKNlo3VDVyYXl0RmdwbUUzUThMVlJ1WjFnS2dGdHBhWFY4SDlCaFMzTmdxZVB5c2d6TXJjWHhoL2I3bVM3aE9CaAo3bTc2YU5mWVpGdFBlOTRlNWMxbHEybUUweXhrMWlVSlY5aEdiaFp3ZDVIQUZ3K1dMa2FwOTV1MVRNenVEZmYwCmhrc3YrOVpyQ01reWNoYlhTaU9DR3V3UisxTU1KVVBGdlRsZgotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+          server: https://172.31.1.238:6443
+        name: ""
+      contexts: null
+      current-context: ""
+      kind: Config
+      preferences: {}
+      users: null
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: "2022-07-20T04:53:12Z"
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:kubeconfig: {}
+      manager: kubeadm
+      operation: Update
+      time: "2022-07-20T04:53:12Z"
+    name: cluster-info
+    namespace: kube-public
+    resourceVersion: "104233"
+    uid: b177bd6a-e90b-44c7-8169-3794b2444bb3
+- apiVersion: v1
+  data:
+    ca.crt: |
+      -----BEGIN CERTIFICATE-----
+      MIIC5zCCAc+gAwIBAgIBADANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDEwprdWJl
+      cm5ldGVzMB4XDTIyMDcyMDA0NTI1MloXDTMyMDcxNzA0NTI1MlowFTETMBEGA1UE
+      AxMKa3ViZXJuZXRlczCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALSu
+      8tn5qu4OjQr38oa5ZctVFuVdxJNZvxBcDS3NrGL/+lDelyNBisi0L2IL8UEniPIv
+      ELbR0um7Qrj6JslQWKVF8vSDKyMwcCNAn1UcDqZWSYIzlPNWVZjtTm6NdttIb31o
+      f/Oq+xAcNVeVmbqZ5YOORuqLV0YeS1+EWZFxAeNYd0Jk3EVX6co1cvmZwzNJWQst
+      8dYyQEYORbzL7B2hBY8OWpjxuG/cgd2pqAVulYNc7eHUxmryCKII8wtccJEmqvZu
+      rOF2ahkE22dGOtDoxJOMpJEBri8soUzmM5WHRj+2cyvV4gAhgHhkFS8I5rumefNK
+      q77CaiFJFXMXoMTqzbsCAwEAAaNCMEAwDgYDVR0PAQH/BAQDAgKkMA8GA1UdEwEB
+      /wQFMAMBAf8wHQYDVR0OBBYEFKcVvp4/r5k422vc+b/mRAMiZHh4MA0GCSqGSIb3
+      DQEBCwUAA4IBAQC0f43tA+ALko7sSH4mWY3F5nr2KSoto472J9nGJNCB1ad/ccOC
+      0Dq6Z5NOWNjaQnYBSjKAUfYtmvH24TasXMqhrvxVzTnMdTnov3l116Rxy6nW1r5/
+      D+LxhUCDxY9GV5TSZk2d9BlVDR5UyLgO4uzLqwTZHQJuvCfu5RDF4cZIrLoeoL2q
+      6Z7T5raytFgpmE3Q8LVRuZ1gKgFtpaXV8H9BhS3NgqePysgzMrcXxh/b7mS7hOBh
+      7m76aNfYZFtPe94e5c1lq2mE0yxk1iUJV9hGbhZwd5HAFw+WLkap95u1TMzuDff0
+      hksv+9ZrCMkychbXSiOCGuwR+1MMJUPFvTlf
+      -----END CERTIFICATE-----
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: "2022-07-20T04:53:16Z"
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:ca.crt: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: "2022-07-20T04:53:16Z"
+    name: kube-root-ca.crt
+    namespace: kube-public
+    resourceVersion: "361"
+    uid: ae6f8fe7-46b4-40ff-976e-a10f0d633910
+- apiVersion: v1
+  data:
+    Corefile: |
+      .:53 {
+          errors
+          health {
+             lameduck 5s
+          }
+          ready
+          kubernetes cluster.local in-addr.arpa ip6.arpa {
+             pods insecure
+             fallthrough in-addr.arpa ip6.arpa
+             ttl 30
+          }
+          prometheus :9153
+          forward . /etc/resolv.conf {
+             max_concurrent 1000
+          }
+          cache 30
+          loop
+          reload
+          loadbalance
+      }
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: "2022-07-20T04:53:12Z"
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:Corefile: {}
+      manager: kubeadm
+      operation: Update
+      time: "2022-07-20T04:53:12Z"
+    name: coredns
+    namespace: kube-system
+    resourceVersion: "242"
+    uid: f28e4647-041d-47d0-a2b0-038935d2d23b
+- apiVersion: v1
+  data:
+    client-ca-file: |
+      -----BEGIN CERTIFICATE-----
+      MIIC5zCCAc+gAwIBAgIBADANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDEwprdWJl
+      cm5ldGVzMB4XDTIyMDcyMDA0NTI1MloXDTMyMDcxNzA0NTI1MlowFTETMBEGA1UE
+      AxMKa3ViZXJuZXRlczCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALSu
+      8tn5qu4OjQr38oa5ZctVFuVdxJNZvxBcDS3NrGL/+lDelyNBisi0L2IL8UEniPIv
+      ELbR0um7Qrj6JslQWKVF8vSDKyMwcCNAn1UcDqZWSYIzlPNWVZjtTm6NdttIb31o
+      f/Oq+xAcNVeVmbqZ5YOORuqLV0YeS1+EWZFxAeNYd0Jk3EVX6co1cvmZwzNJWQst
+      8dYyQEYORbzL7B2hBY8OWpjxuG/cgd2pqAVulYNc7eHUxmryCKII8wtccJEmqvZu
+      rOF2ahkE22dGOtDoxJOMpJEBri8soUzmM5WHRj+2cyvV4gAhgHhkFS8I5rumefNK
+      q77CaiFJFXMXoMTqzbsCAwEAAaNCMEAwDgYDVR0PAQH/BAQDAgKkMA8GA1UdEwEB
+      /wQFMAMBAf8wHQYDVR0OBBYEFKcVvp4/r5k422vc+b/mRAMiZHh4MA0GCSqGSIb3
+      DQEBCwUAA4IBAQC0f43tA+ALko7sSH4mWY3F5nr2KSoto472J9nGJNCB1ad/ccOC
+      0Dq6Z5NOWNjaQnYBSjKAUfYtmvH24TasXMqhrvxVzTnMdTnov3l116Rxy6nW1r5/
+      D+LxhUCDxY9GV5TSZk2d9BlVDR5UyLgO4uzLqwTZHQJuvCfu5RDF4cZIrLoeoL2q
+      6Z7T5raytFgpmE3Q8LVRuZ1gKgFtpaXV8H9BhS3NgqePysgzMrcXxh/b7mS7hOBh
+      7m76aNfYZFtPe94e5c1lq2mE0yxk1iUJV9hGbhZwd5HAFw+WLkap95u1TMzuDff0
+      hksv+9ZrCMkychbXSiOCGuwR+1MMJUPFvTlf
+      -----END CERTIFICATE-----
+    requestheader-allowed-names: '["front-proxy-client"]'
+    requestheader-client-ca-file: |
+      -----BEGIN CERTIFICATE-----
+      MIIC7zCCAdegAwIBAgIBADANBgkqhkiG9w0BAQsFADAZMRcwFQYDVQQDEw5mcm9u
+      dC1wcm94eS1jYTAeFw0yMjA3MjAwNDUyNTJaFw0zMjA3MTcwNDUyNTJaMBkxFzAV
+      BgNVBAMTDmZyb250LXByb3h5LWNhMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIB
+      CgKCAQEAuJltuslN2d2EvSCmPFnHeU7zmFSN//4L/DZ+ed+CQhHO57O4auLBybdi
+      1HtzBRYcpSwo118knu+iGtsxRCyF022QiZ+zCpdZo0B88CCtchuwnAN5CvqlBWm+
+      hNbs7jS8LQbDy5eP2TrtbsRNow+See5l7KqtXbki/m7uIRkQ3e7bxa8IY9ZJhITG
+      gjTlrKm5joWNk62GI/kiqjsZlo8ZoDgf/d/NIupyQsguLTK5Lzo9tBikWpuRGAIy
+      +dRPkBXC5NJxMBW2RtOBzKpZTaVM2zbrYbPHMCZyerH5svQx73JRSRVnfym52s0f
+      LKzE7rXgDg6E6TNfpAgmXrMHlAYCrwIDAQABo0IwQDAOBgNVHQ8BAf8EBAMCAqQw
+      DwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUXFBE2op3xghAmFflz3g2ogJVB8sw
+      DQYJKoZIhvcNAQELBQADggEBAAjmsKSVdzSUgHO8IEt7F1EcxolNr1i7NCXYhgYz
+      TmobJ5FaJphEzw/BYD7l3aOBls1IDJ3ukoo3rwdR5IRiltzxlbjjyW5baaFnKSBp
+      gzHYCIbdHxLd6JYuHfsUoXpgJ45pFZFQe/j44qb0Kpf8ELammrlbOMJCCKOBgdHZ
+      /J/qQVU4WmW1vFx4PU9v9y+NqhKiag50Mr4PSPem6SiSB8kxx3cLHbFvpt9Ce+oG
+      07xhtme+471v3H/svBu19sKANOWHUcdBT+/GjFXA8QLVTohrCX7i+3fpq6YYLtUB
+      DXb2FnhSqrRg+ugaewdxCYMm63vYawu2+9T1b1xSNzu6tFA=
+      -----END CERTIFICATE-----
+    requestheader-extra-headers-prefix: '["X-Remote-Extra-"]'
+    requestheader-group-headers: '["X-Remote-Group"]'
+    requestheader-username-headers: '["X-Remote-User"]'
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: "2022-07-20T04:53:09Z"
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:client-ca-file: {}
+          f:requestheader-allowed-names: {}
+          f:requestheader-client-ca-file: {}
+          f:requestheader-extra-headers-prefix: {}
+          f:requestheader-group-headers: {}
+          f:requestheader-username-headers: {}
+      manager: kube-apiserver
+      operation: Update
+      time: "2022-07-20T04:53:09Z"
+    name: extension-apiserver-authentication
+    namespace: kube-system
+    resourceVersion: "42"
+    uid: c9d32d28-78f4-4db4-9f66-1882a5648867
+- apiVersion: v1
+  data:
+    config.conf: |-
+      apiVersion: kubeproxy.config.k8s.io/v1alpha1
+      bindAddress: 0.0.0.0
+      bindAddressHardFail: false
+      clientConnection:
+        acceptContentTypes: ""
+        burst: 0
+        contentType: ""
+        kubeconfig: /var/lib/kube-proxy/kubeconfig.conf
+        qps: 0
+      clusterCIDR: ""
+      configSyncPeriod: 0s
+      conntrack:
+        maxPerCore: null
+        min: null
+        tcpCloseWaitTimeout: null
+        tcpEstablishedTimeout: null
+      detectLocalMode: ""
+      enableProfiling: false
+      healthzBindAddress: ""
+      hostnameOverride: ""
+      iptables:
+        masqueradeAll: false
+        masqueradeBit: null
+        minSyncPeriod: 0s
+        syncPeriod: 0s
+      ipvs:
+        excludeCIDRs: null
+        minSyncPeriod: 0s
+        scheduler: ""
+        strictARP: false
+        syncPeriod: 0s
+        tcpFinTimeout: 0s
+        tcpTimeout: 0s
+        udpTimeout: 0s
+      kind: KubeProxyConfiguration
+      metricsBindAddress: ""
+      mode: ""
+      nodePortAddresses: null
+      oomScoreAdj: null
+      portRange: ""
+      showHiddenMetricsForVersion: ""
+      udpIdleTimeout: 0s
+      winkernel:
+        enableDSR: false
+        networkName: ""
+        sourceVip: ""
+    kubeconfig.conf: |-
+      apiVersion: v1
+      kind: Config
+      clusters:
+      - cluster:
+          certificate-authority: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+          server: https://172.31.1.238:6443
+        name: default
+      contexts:
+      - context:
+          cluster: default
+          namespace: default
+          user: default
+        name: default
+      current-context: default
+      users:
+      - name: default
+        user:
+          tokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubeadm.kubernetes.io/component-config.hash: sha256:e1ad25a460a6ccf7a3ae91d6502745ddbed72df33271cd32e8687f5e771e051d
+    creationTimestamp: "2022-07-20T04:53:12Z"
+    labels:
+      app: kube-proxy
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:config.conf: {}
+          f:kubeconfig.conf: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubeadm.kubernetes.io/component-config.hash: {}
+          f:labels:
+            .: {}
+            f:app: {}
+      manager: kubeadm
+      operation: Update
+      time: "2022-07-20T04:53:12Z"
+    name: kube-proxy
+    namespace: kube-system
+    resourceVersion: "257"
+    uid: b1804551-c47c-48b8-88e5-d2903e8006a0
+- apiVersion: v1
+  data:
+    ca.crt: |
+      -----BEGIN CERTIFICATE-----
+      MIIC5zCCAc+gAwIBAgIBADANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDEwprdWJl
+      cm5ldGVzMB4XDTIyMDcyMDA0NTI1MloXDTMyMDcxNzA0NTI1MlowFTETMBEGA1UE
+      AxMKa3ViZXJuZXRlczCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALSu
+      8tn5qu4OjQr38oa5ZctVFuVdxJNZvxBcDS3NrGL/+lDelyNBisi0L2IL8UEniPIv
+      ELbR0um7Qrj6JslQWKVF8vSDKyMwcCNAn1UcDqZWSYIzlPNWVZjtTm6NdttIb31o
+      f/Oq+xAcNVeVmbqZ5YOORuqLV0YeS1+EWZFxAeNYd0Jk3EVX6co1cvmZwzNJWQst
+      8dYyQEYORbzL7B2hBY8OWpjxuG/cgd2pqAVulYNc7eHUxmryCKII8wtccJEmqvZu
+      rOF2ahkE22dGOtDoxJOMpJEBri8soUzmM5WHRj+2cyvV4gAhgHhkFS8I5rumefNK
+      q77CaiFJFXMXoMTqzbsCAwEAAaNCMEAwDgYDVR0PAQH/BAQDAgKkMA8GA1UdEwEB
+      /wQFMAMBAf8wHQYDVR0OBBYEFKcVvp4/r5k422vc+b/mRAMiZHh4MA0GCSqGSIb3
+      DQEBCwUAA4IBAQC0f43tA+ALko7sSH4mWY3F5nr2KSoto472J9nGJNCB1ad/ccOC
+      0Dq6Z5NOWNjaQnYBSjKAUfYtmvH24TasXMqhrvxVzTnMdTnov3l116Rxy6nW1r5/
+      D+LxhUCDxY9GV5TSZk2d9BlVDR5UyLgO4uzLqwTZHQJuvCfu5RDF4cZIrLoeoL2q
+      6Z7T5raytFgpmE3Q8LVRuZ1gKgFtpaXV8H9BhS3NgqePysgzMrcXxh/b7mS7hOBh
+      7m76aNfYZFtPe94e5c1lq2mE0yxk1iUJV9hGbhZwd5HAFw+WLkap95u1TMzuDff0
+      hksv+9ZrCMkychbXSiOCGuwR+1MMJUPFvTlf
+      -----END CERTIFICATE-----
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: "2022-07-20T04:53:16Z"
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:ca.crt: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: "2022-07-20T04:53:16Z"
+    name: kube-root-ca.crt
+    namespace: kube-system
+    resourceVersion: "360"
+    uid: f14573f0-6fa7-4081-9ef6-655ab817a6aa
+- apiVersion: v1
+  data:
+    ClusterConfiguration: |
+      apiServer:
+        extraArgs:
+          authorization-mode: Node,RBAC
+        timeoutForControlPlane: 4m0s
+      apiVersion: kubeadm.k8s.io/v1beta2
+      certificatesDir: /etc/kubernetes/pki
+      clusterName: kubernetes
+      controllerManager: {}
+      dns:
+        type: CoreDNS
+      etcd:
+        local:
+          dataDir: /var/lib/etcd
+      imageRepository: k8s.gcr.io
+      kind: ClusterConfiguration
+      kubernetesVersion: v1.20.15
+      networking:
+        dnsDomain: cluster.local
+        serviceSubnet: 10.96.0.0/12
+      scheduler: {}
+    ClusterStatus: |
+      apiEndpoints:
+        ip-172-31-1-238:
+          advertiseAddress: 172.31.1.238
+          bindPort: 6443
+      apiVersion: kubeadm.k8s.io/v1beta2
+      kind: ClusterStatus
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: "2022-07-20T04:53:11Z"
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:ClusterConfiguration: {}
+          f:ClusterStatus: {}
+      manager: kubeadm
+      operation: Update
+      time: "2022-07-20T04:53:11Z"
+    name: kubeadm-config
+    namespace: kube-system
+    resourceVersion: "196"
+    uid: f0956f0c-46ae-41b6-b0ae-9c8c7fccb7d6
+- apiVersion: v1
+  data:
+    kubelet: |
+      apiVersion: kubelet.config.k8s.io/v1beta1
+      authentication:
+        anonymous:
+          enabled: false
+        webhook:
+          cacheTTL: 0s
+          enabled: true
+        x509:
+          clientCAFile: /etc/kubernetes/pki/ca.crt
+      authorization:
+        mode: Webhook
+        webhook:
+          cacheAuthorizedTTL: 0s
+          cacheUnauthorizedTTL: 0s
+      cgroupDriver: cgroupfs
+      clusterDNS:
+      - 10.96.0.10
+      clusterDomain: cluster.local
+      cpuManagerReconcilePeriod: 0s
+      evictionPressureTransitionPeriod: 0s
+      fileCheckFrequency: 0s
+      healthzBindAddress: 127.0.0.1
+      healthzPort: 10248
+      httpCheckFrequency: 0s
+      imageMinimumGCAge: 0s
+      kind: KubeletConfiguration
+      logging: {}
+      nodeStatusReportFrequency: 0s
+      nodeStatusUpdateFrequency: 0s
+      resolvConf: /run/systemd/resolve/resolv.conf
+      rotateCertificates: true
+      runtimeRequestTimeout: 0s
+      shutdownGracePeriod: 0s
+      shutdownGracePeriodCriticalPods: 0s
+      staticPodPath: /etc/kubernetes/manifests
+      streamingConnectionIdleTimeout: 0s
+      syncFrequency: 0s
+      volumeStatsAggPeriod: 0s
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubeadm.kubernetes.io/component-config.hash: sha256:306a726156f1e2879bedabbdfa452caae8a63929426a55de71c22fe901fde977
+    creationTimestamp: "2022-07-20T04:53:11Z"
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:kubelet: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubeadm.kubernetes.io/component-config.hash: {}
+      manager: kubeadm
+      operation: Update
+      time: "2022-07-20T04:53:11Z"
+    name: kubelet-config-1.20
+    namespace: kube-system
+    resourceVersion: "199"
+    uid: 7a0b0e88-fa60-4397-84eb-295efd58540d
+- apiVersion: v1
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kube-peers.weave.works/peers: '{"Peers":[{"PeerName":"fa:32:e4:5a:d2:1f","NodeName":"ip-172-31-1-238"}]}'
+    creationTimestamp: "2022-07-20T04:54:54Z"
+    name: weave-net
+    namespace: kube-system
+    resourceVersion: "577"
+    uid: d02a8d23-39c5-4c08-9682-b2dc1662551b
+- apiVersion: v1
+  data:
+    ca.crt: |
+      -----BEGIN CERTIFICATE-----
+      MIIC5zCCAc+gAwIBAgIBADANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDEwprdWJl
+      cm5ldGVzMB4XDTIyMDcyMDA0NTI1MloXDTMyMDcxNzA0NTI1MlowFTETMBEGA1UE
+      AxMKa3ViZXJuZXRlczCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALSu
+      8tn5qu4OjQr38oa5ZctVFuVdxJNZvxBcDS3NrGL/+lDelyNBisi0L2IL8UEniPIv
+      ELbR0um7Qrj6JslQWKVF8vSDKyMwcCNAn1UcDqZWSYIzlPNWVZjtTm6NdttIb31o
+      f/Oq+xAcNVeVmbqZ5YOORuqLV0YeS1+EWZFxAeNYd0Jk3EVX6co1cvmZwzNJWQst
+      8dYyQEYORbzL7B2hBY8OWpjxuG/cgd2pqAVulYNc7eHUxmryCKII8wtccJEmqvZu
+      rOF2ahkE22dGOtDoxJOMpJEBri8soUzmM5WHRj+2cyvV4gAhgHhkFS8I5rumefNK
+      q77CaiFJFXMXoMTqzbsCAwEAAaNCMEAwDgYDVR0PAQH/BAQDAgKkMA8GA1UdEwEB
+      /wQFMAMBAf8wHQYDVR0OBBYEFKcVvp4/r5k422vc+b/mRAMiZHh4MA0GCSqGSIb3
+      DQEBCwUAA4IBAQC0f43tA+ALko7sSH4mWY3F5nr2KSoto472J9nGJNCB1ad/ccOC
+      0Dq6Z5NOWNjaQnYBSjKAUfYtmvH24TasXMqhrvxVzTnMdTnov3l116Rxy6nW1r5/
+      D+LxhUCDxY9GV5TSZk2d9BlVDR5UyLgO4uzLqwTZHQJuvCfu5RDF4cZIrLoeoL2q
+      6Z7T5raytFgpmE3Q8LVRuZ1gKgFtpaXV8H9BhS3NgqePysgzMrcXxh/b7mS7hOBh
+      7m76aNfYZFtPe94e5c1lq2mE0yxk1iUJV9hGbhZwd5HAFw+WLkap95u1TMzuDff0
+      hksv+9ZrCMkychbXSiOCGuwR+1MMJUPFvTlf
+      -----END CERTIFICATE-----
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: "2022-09-07T10:35:41Z"
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:ca.crt: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: "2022-09-07T10:35:41Z"
+    name: kube-root-ca.crt
+    namespace: porch-fn-system
+    resourceVersion: "5122041"
+    uid: a318d089-0ad6-4f1a-820a-f2a3bffdbdfb
+- apiVersion: v1
+  data:
+    ca.crt: |
+      -----BEGIN CERTIFICATE-----
+      MIIC5zCCAc+gAwIBAgIBADANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDEwprdWJl
+      cm5ldGVzMB4XDTIyMDcyMDA0NTI1MloXDTMyMDcxNzA0NTI1MlowFTETMBEGA1UE
+      AxMKa3ViZXJuZXRlczCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALSu
+      8tn5qu4OjQr38oa5ZctVFuVdxJNZvxBcDS3NrGL/+lDelyNBisi0L2IL8UEniPIv
+      ELbR0um7Qrj6JslQWKVF8vSDKyMwcCNAn1UcDqZWSYIzlPNWVZjtTm6NdttIb31o
+      f/Oq+xAcNVeVmbqZ5YOORuqLV0YeS1+EWZFxAeNYd0Jk3EVX6co1cvmZwzNJWQst
+      8dYyQEYORbzL7B2hBY8OWpjxuG/cgd2pqAVulYNc7eHUxmryCKII8wtccJEmqvZu
+      rOF2ahkE22dGOtDoxJOMpJEBri8soUzmM5WHRj+2cyvV4gAhgHhkFS8I5rumefNK
+      q77CaiFJFXMXoMTqzbsCAwEAAaNCMEAwDgYDVR0PAQH/BAQDAgKkMA8GA1UdEwEB
+      /wQFMAMBAf8wHQYDVR0OBBYEFKcVvp4/r5k422vc+b/mRAMiZHh4MA0GCSqGSIb3
+      DQEBCwUAA4IBAQC0f43tA+ALko7sSH4mWY3F5nr2KSoto472J9nGJNCB1ad/ccOC
+      0Dq6Z5NOWNjaQnYBSjKAUfYtmvH24TasXMqhrvxVzTnMdTnov3l116Rxy6nW1r5/
+      D+LxhUCDxY9GV5TSZk2d9BlVDR5UyLgO4uzLqwTZHQJuvCfu5RDF4cZIrLoeoL2q
+      6Z7T5raytFgpmE3Q8LVRuZ1gKgFtpaXV8H9BhS3NgqePysgzMrcXxh/b7mS7hOBh
+      7m76aNfYZFtPe94e5c1lq2mE0yxk1iUJV9hGbhZwd5HAFw+WLkap95u1TMzuDff0
+      hksv+9ZrCMkychbXSiOCGuwR+1MMJUPFvTlf
+      -----END CERTIFICATE-----
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: "2022-09-07T10:35:41Z"
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:ca.crt: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: "2022-09-07T10:35:41Z"
+    name: kube-root-ca.crt
+    namespace: porch-system
+    resourceVersion: "5122046"
+    uid: b704fe76-aaed-44be-8cf3-bcba94d96d4b
+- apiVersion: v1
+  data:
+    pod-cache-config.yaml: |
+      gcr.io/kpt-fn/apply-replacements:v0.1.1: 30m
+      gcr.io/kpt-fn/apply-setters:v0.2.0: 30m
+      gcr.io/kpt-fn/create-setters:v0.1.0: 30m
+      gcr.io/kpt-fn/ensure-name-substring:v0.2.0: 30m
+      gcr.io/kpt-fn/gatekeeper:v0.2.1: 30m
+      gcr.io/kpt-fn/kubeval:v0.2.0: 30m
+      gcr.io/kpt-fn/search-replace:v0.2.0: 30m
+      gcr.io/kpt-fn/set-annotations:v0.1.4: 30m
+      gcr.io/kpt-fn/set-enforcement-action:v0.1.0: 30m
+      gcr.io/kpt-fn/set-image:v0.1.1: 30m
+      gcr.io/kpt-fn/set-labels:v0.1.5: 30m
+      gcr.io/kpt-fn/set-namespace:v0.4.1: 30m
+      gcr.io/kpt-fn/starlark:v0.4.3: 30m
+      gcr.io/kpt-fn/upsert-resource:v0.2.0: 30m
+      gcr.io/kpt-fn/enable-gcp-services:v0.1.0: 30m
+      gcr.io/kpt-fn/export-terraform:v0.1.0: 30m
+      gcr.io/kpt-fn/generate-folders:v0.1.1: 30m
+      gcr.io/kpt-fn/remove-local-config-resources:v0.1.0: 30m
+      gcr.io/kpt-fn/set-project-id:v0.2.0: 30m
+  kind: ConfigMap
+  metadata:
+    annotations:
+      config.k8s.io/owning-inventory: a8db52f4b97768c3a4585cbab51b933786f6e266-1662546928060251452
+      internal.kpt.dev/upstream-identifier: '|ConfigMap|porch-system|pod-cache-config'
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","data":{"pod-cache-config.yaml":"gcr.io/kpt-fn/apply-replacements:v0.1.1: 30m\ngcr.io/kpt-fn/apply-setters:v0.2.0: 30m\ngcr.io/kpt-fn/create-setters:v0.1.0: 30m\ngcr.io/kpt-fn/ensure-name-substring:v0.2.0: 30m\ngcr.io/kpt-fn/gatekeeper:v0.2.1: 30m\ngcr.io/kpt-fn/kubeval:v0.2.0: 30m\ngcr.io/kpt-fn/search-replace:v0.2.0: 30m\ngcr.io/kpt-fn/set-annotations:v0.1.4: 30m\ngcr.io/kpt-fn/set-enforcement-action:v0.1.0: 30m\ngcr.io/kpt-fn/set-image:v0.1.1: 30m\ngcr.io/kpt-fn/set-labels:v0.1.5: 30m\ngcr.io/kpt-fn/set-namespace:v0.4.1: 30m\ngcr.io/kpt-fn/starlark:v0.4.3: 30m\ngcr.io/kpt-fn/upsert-resource:v0.2.0: 30m\ngcr.io/kpt-fn/enable-gcp-services:v0.1.0: 30m\ngcr.io/kpt-fn/export-terraform:v0.1.0: 30m\ngcr.io/kpt-fn/generate-folders:v0.1.1: 30m\ngcr.io/kpt-fn/remove-local-config-resources:v0.1.0: 30m\ngcr.io/kpt-fn/set-project-id:v0.2.0: 30m\n"},"kind":"ConfigMap","metadata":{"annotations":{"config.k8s.io/owning-inventory":"a8db52f4b97768c3a4585cbab51b933786f6e266-1662546928060251452","internal.kpt.dev/upstream-identifier":"|ConfigMap|porch-system|pod-cache-config"},"name":"pod-cache-config","namespace":"porch-system"}}
+    creationTimestamp: "2022-09-07T10:35:43Z"
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:pod-cache-config.yaml: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:config.k8s.io/owning-inventory: {}
+            f:internal.kpt.dev/upstream-identifier: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+      manager: kubectl
+      operation: Update
+      time: "2022-09-07T10:35:43Z"
+    name: pod-cache-config
+    namespace: porch-system
+    resourceVersion: "5122092"
+    uid: e7c906b9-ce03-4691-9f23-6122a9930c6f
+- apiVersion: v1
+  kind: ConfigMap
+  metadata:
+    annotations:
+      control-plane.alpha.kubernetes.io/leader: '{"holderIdentity":"resource-group-controller-manager-67f55f8c57-cww4p_f2309d60-9ec4-45ac-bbb0-c825255fe7cc","leaseDurationSeconds":15,"acquireTime":"2022-09-07T10:36:58Z","renewTime":"2022-09-07T13:53:31Z","leaderTransitions":0}'
+    creationTimestamp: "2022-09-07T10:36:58Z"
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:control-plane.alpha.kubernetes.io/leader: {}
+      manager: manager
+      operation: Update
+      time: "2022-09-07T10:36:58Z"
+    name: 413d8c8e.gke.io
+    namespace: resource-group-system
+    resourceVersion: "5167408"
+    uid: a4d422f4-4faa-4eed-9cfb-946acceb84ad
+- apiVersion: v1
+  data:
+    ca.crt: |
+      -----BEGIN CERTIFICATE-----
+      MIIC5zCCAc+gAwIBAgIBADANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDEwprdWJl
+      cm5ldGVzMB4XDTIyMDcyMDA0NTI1MloXDTMyMDcxNzA0NTI1MlowFTETMBEGA1UE
+      AxMKa3ViZXJuZXRlczCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALSu
+      8tn5qu4OjQr38oa5ZctVFuVdxJNZvxBcDS3NrGL/+lDelyNBisi0L2IL8UEniPIv
+      ELbR0um7Qrj6JslQWKVF8vSDKyMwcCNAn1UcDqZWSYIzlPNWVZjtTm6NdttIb31o
+      f/Oq+xAcNVeVmbqZ5YOORuqLV0YeS1+EWZFxAeNYd0Jk3EVX6co1cvmZwzNJWQst
+      8dYyQEYORbzL7B2hBY8OWpjxuG/cgd2pqAVulYNc7eHUxmryCKII8wtccJEmqvZu
+      rOF2ahkE22dGOtDoxJOMpJEBri8soUzmM5WHRj+2cyvV4gAhgHhkFS8I5rumefNK
+      q77CaiFJFXMXoMTqzbsCAwEAAaNCMEAwDgYDVR0PAQH/BAQDAgKkMA8GA1UdEwEB
+      /wQFMAMBAf8wHQYDVR0OBBYEFKcVvp4/r5k422vc+b/mRAMiZHh4MA0GCSqGSIb3
+      DQEBCwUAA4IBAQC0f43tA+ALko7sSH4mWY3F5nr2KSoto472J9nGJNCB1ad/ccOC
+      0Dq6Z5NOWNjaQnYBSjKAUfYtmvH24TasXMqhrvxVzTnMdTnov3l116Rxy6nW1r5/
+      D+LxhUCDxY9GV5TSZk2d9BlVDR5UyLgO4uzLqwTZHQJuvCfu5RDF4cZIrLoeoL2q
+      6Z7T5raytFgpmE3Q8LVRuZ1gKgFtpaXV8H9BhS3NgqePysgzMrcXxh/b7mS7hOBh
+      7m76aNfYZFtPe94e5c1lq2mE0yxk1iUJV9hGbhZwd5HAFw+WLkap95u1TMzuDff0
+      hksv+9ZrCMkychbXSiOCGuwR+1MMJUPFvTlf
+      -----END CERTIFICATE-----
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: "2022-09-07T10:36:24Z"
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:ca.crt: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: "2022-09-07T10:36:24Z"
+    name: kube-root-ca.crt
+    namespace: resource-group-system
+    resourceVersion: "5122562"
+    uid: 88bc318b-aaf9-4b06-96eb-454500158fcc
+- apiVersion: v1
+  data:
+    otel-agent-config.yaml: |
+      receivers:
+        opencensus:
+      exporters:
+        opencensus:
+          endpoint: otel-collector.config-management-monitoring:55678
+          tls:
+            insecure: true
+      processors:
+        batch:
+      extensions:
+        health_check:
+      service:
+        extensions: [health_check]
+        pipelines:
+          metrics:
+            receivers: [opencensus]
+            processors: [batch]
+            exporters: [opencensus]
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","data":{"otel-agent-config.yaml":"receivers:\n  opencensus:\nexporters:\n  opencensus:\n    endpoint: otel-collector.config-management-monitoring:55678\n    tls:\n      insecure: true\nprocessors:\n  batch:\nextensions:\n  health_check:\nservice:\n  extensions: [health_check]\n  pipelines:\n    metrics:\n      receivers: [opencensus]\n      processors: [batch]\n      exporters: [opencensus]\n"},"kind":"ConfigMap","metadata":{"annotations":{},"labels":{"app":"opentelemetry","component":"otel-agent","configmanagement.gke.io/arch":"csmr","configmanagement.gke.io/configmanagement":"config-management","configmanagement.gke.io/system":"true","k8s-app":"kubernetes-config-management"},"name":"resource-group-otel-agent","namespace":"resource-group-system","ownerReferences":[{"apiVersion":"configmanagement.gke.io/v1","blockOwnerDeletion":true,"controller":true,"kind":"ConfigManagement","name":"config-management","uid":"39674f5c-7067-413b-803a-4a163e6cdace"}]}}
+    creationTimestamp: "2022-09-07T10:36:24Z"
+    labels:
+      app: opentelemetry
+      component: otel-agent
+      configmanagement.gke.io/arch: csmr
+      configmanagement.gke.io/configmanagement: config-management
+      configmanagement.gke.io/system: "true"
+      k8s-app: kubernetes-config-management
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:otel-agent-config.yaml: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:component: {}
+            f:configmanagement.gke.io/arch: {}
+            f:configmanagement.gke.io/configmanagement: {}
+            f:configmanagement.gke.io/system: {}
+            f:k8s-app: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"39674f5c-7067-413b-803a-4a163e6cdace"}:
+              .: {}
+              f:apiVersion: {}
+              f:blockOwnerDeletion: {}
+              f:controller: {}
+              f:kind: {}
+              f:name: {}
+              f:uid: {}
+      manager: Go-http-client
+      operation: Update
+      time: "2022-09-07T10:36:24Z"
+    name: resource-group-otel-agent
+    namespace: resource-group-system
+    ownerReferences:
+    - apiVersion: configmanagement.gke.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ConfigManagement
+      name: config-management
+      uid: 39674f5c-7067-413b-803a-4a163e6cdace
+    resourceVersion: "5122583"
+    uid: f6a183d0-22c4-45fe-92eb-4d34f3bbceea
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""
