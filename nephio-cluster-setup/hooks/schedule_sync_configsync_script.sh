@@ -36,7 +36,7 @@ export PATH="/usr/local/bin:/usr/bin:/bin"
              #deploy configsync
              REPO_NAME=$(kubectl get clusters.infra.nephio.org $cluster\
                      -o jsonpath='{.repositoryRef.name}')
-             kpt pkg get --for-deployment https://github.com/sandeepAarna/nephio-test-deploy-01.git/rootsync temp
+             kpt pkg get --for-deployment https://github.com/sandeepAarna/nephio-test-deploy-01.git/configsync temp
              kpt fn eval temp --save --type mutator --image gcr.io/kpt-fn/search-replace:v0.2.0 \
                      -- by-path=spec.git.repo by-value-regex='https://github.com/[a-zA-Z0-9-]+/(.*)' \
                      put-value="https://github.com/${GITHUB_USERNAME}/${REPO_NAME}"
