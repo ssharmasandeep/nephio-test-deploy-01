@@ -53,5 +53,26 @@ export PATH="/usr/local/bin:/usr/bin:/bin"
                      | kubectl::replace_or_create $cluster
 
 	     #Mark cluster object as Ready
-	     kubectl get clusters.infra.nephio.org $cluster -o json | jq -r ".metadata.labels.\"nephio.org/site-status\" = \"Ready\" | .metadata |= with_entries(select([.key] | inside([\"name\", \"namespace\", \"labels\"])))" | kubectl::replace_or_create kubernetes-admin@kubernetes 
+	     rm -rf default
+	     name=$(kpt alpha rpkg get --name=default --revision=v1  -o json | jq -r \
+		     'select(.spec.packageName=="default").metadata.name')
+             kpt alpha rpkg del $name -ndefault
+
+             name=$(kpt alpha rpkg get --name=default --revision=main  -o json | jq -r \
+		     'select(.spec.packageName=="default").metadata.name')
+             kpt alpha rpkg clone $name default --repository=infra-deployment -ndefault
+             kpt alpha rpkg pull $name ./default -ndefault
+
+             sed -i 's/NotReady/Ready/g' default/infra_v1alpha1_cluster.yaml
+             name=$(kpt alpha rpkg get --name=default --revision=v1  -o json | jq -r \
+		     'select(.spec.packageName=="default").metadata.name')
+             kpt alpha rpkg push $name ./default -n default
+             kpt alpha rpkg propose $name -ndefault
+             kpt alpha rpkg approve $name -ndefault
+
+	     # Approve all workload packages target for this cluster
+	     pkg=$(kpt alpha rpkg get -o json | jq -r \
+		     --arg repo $REPO_NAME 'select(.spec.repository==$repo and .spec.lifecycle=="Proposed").metadata.name')
+             kpt alpha rpkg approve $pkg -ndefault	     
+	     
      done
