@@ -3,12 +3,12 @@ kind: Cluster
 metadata: # kpt-merge: /mec-new-eks-cluster
   name: mec-new-eks-cluster
   labels:
-    nephio.org/region: us-central1
+    nephio.org/region: us-central3
     nephio.org/site-type: aggregation
     nephio.org/site: edge-01
     nephio.org/site-status: NotReady
   annotations:
     internal.kpt.dev/upstream-identifier: 'infra.nephio.org|Cluster|default|mec-new-eks-cluster'
-scaleProfileName: small-fixed-site
+#scaleProfileName: small-fixed-site
 repositoryRef:
-  name: repo-edge-01
+  name: nephio-region1
