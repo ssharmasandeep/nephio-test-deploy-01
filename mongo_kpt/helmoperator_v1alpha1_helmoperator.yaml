@@ -1,0 +1,21 @@
+apiVersion: helmoperator.example.com/v1alpha1
+kind: HelmOperator
+metadata:
+  labels:
+    app.kubernetes.io/name: helmoperator
+    app.kubernetes.io/instance: helmoperator-sample
+    app.kubernetes.io/part-of: helm-operator
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: helm-operator
+  name: helmoperator-mongo
+spec:
+  meta:
+    context: /opt/ansible/config
+    role: helmoperator
+    chart_release_name: test
+    chart_name: mongo
+    chart_version: 0.1.0
+    helm_namespace: mongo
+    repo_name: myhelmrepo
+    repo_url: https://ssharmasandeep.github.io/myhelmrepo
+    role_path: /opt/ansible
